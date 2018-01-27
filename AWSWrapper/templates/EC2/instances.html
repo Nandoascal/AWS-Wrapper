@@ -16,7 +16,7 @@
             </li>
             <li class="breadcrumb-item active"><a href="/EC2/instances">Instances</a></li>
         </ol>
-        <h1>Instances</h1>
+        <h1 class="align-left">Instances</h1>
         <hr>
         <!-- Icon Cards-->
         <div class="row">
@@ -27,10 +27,12 @@
                         <div class="card-body">
                             <div class="card-body-icon">
                                 {% if instance.state == 'running' %}
-                                    <i class="fas fa-toggle-on"></i>
+                                    <i class="fas fa-circle"></i>
                                 {% elif instance.state == 'pending' or instance.state == 'shutting-down' or instance.state == 'stopping' %}
-                                    <i class="fas fa-spin fa-sync-alt"></i>
-                                {% else %}
+                                    <i class="fas fa-spin fa-circle-notch"></i>
+                                {% elif instance.state == 'terminated' %}
+                                    <i class="fas fa-trash-alt"></i>
+                                {% elif instance.state == 'stopped' %}
                                     <i class="fas fa-power-off"></i>
                                 {% endif %}
                             </div>
