@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
-
+from AWSWrapper import Instances
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://brickhack:' + password + '@' + ip + '/brickhack'
@@ -11,13 +11,13 @@ db = SQLAlchemy(app)
 def home():
     return render_template("index.html")
 
-@app.route("/EC2/instance", methods=["GET"])
-def instance():
+
+@app.route("/EC2/instance/<instance_id>", methods=["GET"])
+def instance(instance_id=None):
     return render_template("EC2/instance.html")
+
 
 @app.route("/EC2/instances", methods=["GET"])
 def EC2_instances():
-    instances = [{'name': 'test1', 'state': 'running'}, {'name': 'test2', 'state': 'pending'},
-                 {'name': 'test3', 'state': 'shutting-down'}, {'name': 'test4', 'state': 'stopped'},
-                 {'name': 'test5', 'state': 'terminated'}]
+    instances = Instances.Instances().get_all_info()
     return render_template("EC2/instances.html", instances=instances)
