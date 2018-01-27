@@ -2,13 +2,59 @@ import boto3
 
 
 class Instances:
-
     def __init__(self):
         ec2 = boto3.resource('ec2', region_name='us-east-2')
 
         # gives back instance IDs and instance types of all instances.
         self.instances = ec2.instances.filter(
             Filters=[{'Name': 'instance-state-name', 'Values': ['*']}])
+
+    def get_one_instance_info(self, instanceId):
+        try:
+            info = {}
+            info[instanceId] = {
+                'ami_launch_index': instanceId.ami_launch_index,
+                'instance_type': instanceId.instance_type,
+                'state': instanceId.state['Name'],
+                'state_reason': instanceId.state_reason,
+                'state_transition_reason': instanceId.state_transition_reason,
+                'public_ip': instanceId.public_ip_address,
+                'private_ip': instanceId.private_ip_address,
+                'launch_time': instanceId.launch_time,
+                'kernel_id': instanceId.kernel_id,
+                'tags': instanceId.tags,
+                'architecture': instanceId.architecture,
+                'device_name': instanceId.block_device_mappings,
+                'client_token': instanceId.client_token,
+                'ebs_optimized': instanceId.ebs_optimized,
+                'elastic_gpu_associations': instanceId.elastic_gpu_associations,
+                'ena_support': instanceId.ena_support,
+                'hypervisor': instanceId.hypervisor,
+                'iam_instance_profile': instanceId.iam_instance_profile,
+                'image_id': instanceId.image_id,
+                'instance_id': instanceId.instance_id,
+                'key_name': instanceId.key_name,
+                'monitoring': instanceId.monitoring,
+                'network_interfaces_attribute': instanceId.network_interfaces_attribute,
+                'placement': instanceId.placement,
+                'platform': instanceId.platform,
+                'private_dns_name': instanceId.private_dns_name,
+                'product_codes': instanceId.product_codes,
+                'public_dns_name': instanceId.public_dns_name,
+                'ramdisk_id': instanceId.ramdisk_id,
+                'root_device_name': instanceId.root_device_name,
+                'root_device_type': instanceId.root_device_type,
+                'security_groups': instanceId.security_groups,
+                'source_dest_check': instanceId.source_dest_check,
+                'spot_instance_request_id': instanceId.spot_instance_request_id,
+                'sriov_net_support': instanceId.sriov_net_support,
+                'subnet_id': instanceId.subnet_id,
+                'virtualization_type': instanceId.virtualization_type,
+                'vpc_id': instanceId.vpc_id
+
+            }
+        except:
+            print('e')
 
     def get_all_info(self):
         try:
