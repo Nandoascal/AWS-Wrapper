@@ -1,0 +1,55 @@
+.bg-rebooting {
+    background-color: #007bff !important;
+}
+
+a.bg-rebooting:hover, a.bg-rebooting:focus,
+button.bg-rebooting:hover,
+button.bg-rebooting:focus {
+    background-color: #0062cc !important;
+}
+
+.bg-running {
+    background-color: #28a745 !important;
+}
+
+a.bg-running:hover, a.bg-running:focus,
+button.bg-running:hover,
+button.bg-running:focus {
+    background-color: #1e7e34 !important;
+}
+
+.bg-pending {
+    background-color: #17a2b8 !important;
+}
+
+a.bg-pending:hover, a.bg-pending:focus,
+button.bg-pending:hover,
+button.bg-pending:focus {
+    background-color: #117a8b !important;
+}
+
+.bg-stopping, .bg-shutting-down {
+    background-color: #ffc107 !important;
+}
+
+a.bg-stopping:hover, a.bg-stopping:focus,
+button.bg-stopping:hover,
+button.bg-stopping:focus,
+a.bg-shutting-down:hover, a.bg-shutting-down:focus,
+button.bg-shutting-down:hover,
+button.bg-shutting-down:focus{
+    background-color: #d39e00 !important;
+}
+
+.bg-terminated, .bg-stopped {
+    background-color: #dc3545 !important;
+}
+
+a.bg-terminated:hover, a.bg-terminated:focus,
+button.bg-terminated:hover,
+button.bg-terminated:focus,
+a.bg-stopped:hover, a.bg-stopped:focus,
+button.bg-stopped:hover,
+button.bg-stopped:focus {
+    background-color: #bd2130 !important;
+}
