@@ -14,7 +14,8 @@ def home():
 
 @app.route("/EC2/instance/<instance_id>", methods=["GET"])
 def instance(instance_id=None):
-    return render_template("EC2/instance.html")
+    instance = Instances.Instances().get_one_instance_info(instance_id)
+    return render_template("EC2/instance.html", instance=instance)
 
 
 @app.route("/EC2/instances", methods=["GET"])
