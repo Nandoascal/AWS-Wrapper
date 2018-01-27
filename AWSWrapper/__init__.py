@@ -16,4 +16,6 @@ def instance():
 
 @app.route("/EC2/instances", methods=["GET"])
 def EC2_instances():
-    return render_template("EC2/instances.html")
+    instances = [{'name': 'test1', 'state': 'running'}, {'name': 'test2', 'state': 'pending'},
+                 {'name': 'test3', 'state': 'shutting-down'}, {'name': 'test3', 'state': 'stopped'}]
+    return render_template("EC2/instances.html", instances=instances)
