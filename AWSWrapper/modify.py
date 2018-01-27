@@ -9,3 +9,5 @@ def mondify(instance, attribute, value):
     waiter.wait(InstanceIds=[instance])
 
     ec2.modify_instance_attribute(InstanceId=instance, Attribute=attribute, Value=value)
+
+    ec2.start_instances(InstancesIds=instance)
