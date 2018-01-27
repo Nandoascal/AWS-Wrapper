@@ -7,5 +7,5 @@ db = SQLAlchemy(app)
 
 
 @app.route("/", methods=["GET"])
-def home(auth_dict=None):
+def home():
     return render_template("index.html")
