@@ -10,7 +10,7 @@ db = SQLAlchemy(app)
 def home():
     return render_template("index.html")
 
-@app.route("/ECT/instance", methods=["GET"])
+@app.route("/EC2/instance", methods=["GET"])
 def instance():
     return render_template("EC2/instance.html")
 
