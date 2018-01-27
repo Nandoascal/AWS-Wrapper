@@ -3,8 +3,8 @@ import boto3
 ec2 = boto3.client('ec2')
 
 
-def mondify(instance, attribute, value):
-    ec2.stop_instances(InstancesIds =[instance])
+def modify(instance, attribute, value):
+    ec2.stop_instances(InstancesIds=[instance])
     waiter = ec2.get_waiter('instance_stopped')
     waiter.wait(InstanceIds=[instance])
 
