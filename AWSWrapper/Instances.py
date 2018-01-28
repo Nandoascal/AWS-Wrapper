@@ -1,106 +1,43 @@
 import boto3
 
 
+ec2_resource = boto3.resource('ec2')
+ec2_client = boto3.client('ec2')
+
+
 class Instances:
+
     def __init__(self):
-        ec2 = boto3.resource('ec2', region_name='us-east-2')
+        self.instance_list = []
 
-        # gives back instance IDs and instance types of all instances.
-        self.instances = ec2.instances.filter(
-            Filters=[{'Name': 'instance-state-name', 'Values': ['*']}])
-
-    def get_one_instance_info(self, instanceId):
-        try:
-            info = {}
-            info[instanceId] = {
-                'ami_launch_index': instanceId.ami_launch_index,
-                'instance_type': instanceId.instance_type,
-                'state': instanceId.state['Name'],
-                'state_reason': instanceId.state_reason,
-                'state_transition_reason': instanceId.state_transition_reason,
-                'public_ip': instanceId.public_ip_address,
-                'private_ip': instanceId.private_ip_address,
-                'launch_time': instanceId.launch_time,
-                'kernel_id': instanceId.kernel_id,
-                'tags': instanceId.tags,
-                'architecture': instanceId.architecture,
-                'device_name': instanceId.block_device_mappings,
-                'client_token': instanceId.client_token,
-                'ebs_optimized': instanceId.ebs_optimized,
-                'elastic_gpu_associations': instanceId.elastic_gpu_associations,
-                'ena_support': instanceId.ena_support,
-                'hypervisor': instanceId.hypervisor,
-                'iam_instance_profile': instanceId.iam_instance_profile,
-                'image_id': instanceId.image_id,
-                'instance_id': instanceId.instance_id,
-                'key_name': instanceId.key_name,
-                'monitoring': instanceId.monitoring,
-                'network_interfaces_attribute': instanceId.network_interfaces_attribute,
-                'placement': instanceId.placement,
-                'platform': instanceId.platform,
-                'private_dns_name': instanceId.private_dns_name,
-                'product_codes': instanceId.product_codes,
-                'public_dns_name': instanceId.public_dns_name,
-                'ramdisk_id': instanceId.ramdisk_id,
-                'root_device_name': instanceId.root_device_name,
-                'root_device_type': instanceId.root_device_type,
-                'security_groups': instanceId.security_groups,
-                'source_dest_check': instanceId.source_dest_check,
-                'spot_instance_request_id': instanceId.spot_instance_request_id,
-                'sriov_net_support': instanceId.sriov_net_support,
-                'subnet_id': instanceId.subnet_id,
-                'virtualization_type': instanceId.virtualization_type,
-                'vpc_id': instanceId.vpc_id
-
-            }
-        except:
-            print('e')
 
     def get_all_info(self):
-        try:
-            ec2info = dict()
-            for instance in self.instances:
-                ec2info[instance.id] = {
-                    'ami_launch_index': instance.ami_launch_index,
-                    'instance_type': instance.instance_type,
-                    'state': instance.state['Name'],
-                    'state_reason': instance.state_reason,
-                    'state_transition_reason': instance.state_transition_reason,
-                    'public_ip': instance.public_ip_address,
-                    'private_ip': instance.private_ip_address,
-                    'launch_time': instance.launch_time,
-                    'kernel_id': instance.kernel_id,
-                    'tags': instance.tags,
-                    'architecture': instance.architecture,
-                    'device_name': instance.block_device_mappings,
-                    'client_token': instance.client_token,
-                    'ebs_optimized': instance.ebs_optimized,
-                    'elastic_gpu_associations': instance.elastic_gpu_associations,
-                    'ena_support': instance.ena_support,
-                    'hypervisor': instance.hypervisor,
-                    'iam_instance_profile': instance.iam_instance_profile,
-                    'image_id': instance.image_id,
-                    'instance_id': instance.instance_id,
-                    'key_name': instance.key_name,
-                    'monitoring': instance.monitoring,
-                    'network_interfaces_attribute': instance.network_interfaces_attribute,
-                    'placement': instance.placement,
-                    'platform': instance.platform,
-                    'private_dns_name': instance.private_dns_name,
-                    'product_codes': instance.product_codes,
-                    'public_dns_name': instance.public_dns_name,
-                    'ramdisk_id': instance.ramdisk_id,
-                    'root_device_name': instance.root_device_name,
-                    'root_device_type': instance.root_device_type,
-                    'security_groups': instance.security_groups,
-                    'source_dest_check': instance.source_dest_check,
-                    'spot_instance_request_id': instance.spot_instance_request_id,
-                    'sriov_net_support': instance.sriov_net_support,
-                    'subnet_id': instance.subnet_id,
-                    'virtualization_type': instance.virtualization_type,
-                    'vpc_id': instance.vpc_id
+        instances_info = {}
 
-                }
-            return ec2info
-        except:
-            print('e')
+        for instance in instance_list:
+            instance_info[instance.instance_id] = instance.get_info()
+
+    ### Add key pair functionality to both ###
+    def launch_named_instance(self, name, image_id):
+        instance = ec2_resource.create_instances(
+                ImageId=image_id,
+                MaxCount=1,
+                MinCount=1,
+                TagSpecifications=[
+                    {
+                        'ResourceType':'instance',
+                        'Tags':[
+                            'Key':'Name',
+                            'Value':name
+                            ]
+                        }
+                    ]
+                )
+
+
+    def launch_instance(self, image_id):
+        instance = ec2_resource.create_instances(
+                ImageId=image_id,
+                MaxCount=1,
+                MinCount=1
+                )
