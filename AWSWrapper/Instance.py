@@ -36,23 +36,23 @@ class Instance:
 
         ec2_client.start_instances(InstanceIds=[self.instance_id])
 
-    def add_tag(self):
+    def add_tag(self, key, value):
         """
         adds a tag to an instance
         """
         response = ec2_client.create_tags(
             Resources=[
-                self.instanceId,
+                self.instance_id,
             ],
             Tags=[
                 {
-                    'Key': 'testTag',
-                    'Value': 'Jack is a shit'
+                    'Key': key,
+                    'Value': value
                 },
             ]
         )
 
-    def delete_tags(self, key, value):
+    def delete_tag(self, key, value):
         """
         boto3 is junk and requires you to input all the information of a tag to delete it.
         :param key: the tag name
@@ -70,7 +70,7 @@ class Instance:
             ],
         )
 
-    def change_tags(self, Key, Value, newKey, newValue):
+    def change_tag(self, Key, Value, newKey, newValue):
         """
         boto3 has no real way of editing the keyname or valuename as far as I could tell
         so my best solution was to delete the tag and remake it.
@@ -79,35 +79,17 @@ class Instance:
         :param newKey: new name/key
         :param newValue: new description/value
         """
-        response = ec2_client.delete_tags(
-            Resources=[
-                self.instance_id,
-            ],
-            Tags=[
-                {
-                    'Key': Key,
-                    'Value': Value,
-                },
-            ],
-        )
 
-        response = ec2_client.create_tags(
-            Resources=[
-                self.instance_id
-            ],
-            Tags=[
-                {
-                    'Key': newKey,
-                    'Value': newValue,
-                },
-            ],
-        )
+        self.delete_tag(Key, Value)
+
+        self.add_tag(newKey, newValue)
+
 
     def turn_on(self):
         """
         turns on a stopped instance
         """
-        try:
+        try: # Tests your permissions before actually going through with it
             response = ec2_client.start_instances(InstanceIds=[self.instance_id],
                                                   DryRun=True)
         except ClientError as e:
@@ -125,7 +107,7 @@ class Instance:
         turns off a running instance
         :return:
         """
-        try:
+        try: # Tests your permissions before actually going through with it
             response = ec2_client.stop_instances(InstanceIds=[self.instance_id],
                                                  DryRun=True)
         except ClientError as e:
@@ -142,7 +124,7 @@ class Instance:
         """
         reboots an instance
         """
-        try:
+        try: # Tests your permissons before actually going through with it
             response = ec2_client.reboot_instances(InstanceIds=[self.instance_id],
                                                    DryRun=True)
         except ClientError as e:
@@ -159,7 +141,7 @@ class Instance:
         """
         deletes the instance
         """
-        try:
+        try: # Tests your permissions before actually going through with it
             response = ec2_client.reboot_instances(InstanceIds=[self.instance_id],
                                                    DryRun=True)
         except ClientError as e:
