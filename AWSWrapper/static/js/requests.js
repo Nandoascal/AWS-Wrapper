@@ -1,59 +1,11 @@
-function buttonAjax(buttonElem, options, failOnly) {
-    if (failOnly === undefined) {
-        failOnly = false;
-    }
-
-    // Get original html and click events
-    var html = buttonElem.html();
-
-    // Disable button
-    buttonElem
-        .prop('disabled', true)
-        .css('pointer-events', 'none')
-        .css('cursor', 'not-allowed');
-
-    // Set spinner
-    var icons = buttonElem.find('i.fa');
-    if (icons.length > 0) {
-        // Set icon to spinner
-        var icon = $(icons[0]);
-        icon.removeClass('fa-*');
-        icon.addClass('fa-spinner fa-spin')
-    } else {
-        // Prepend spinner
-        buttonElem.html('<i class="fa fa-spinner fa-spin"></i>&nbsp;' + html);
-    }
-
-    var disableFunc = function () {
-        // Reset original html
-        buttonElem.html(html);
-
-        // Enable button
-        buttonElem
-            .css('pointer-events', '')
-            .prop('disabled', false)
-            .css('cursor', '');
-    };
-
-    // Send AJAX
-    if (failOnly === true) {
-        return $.ajax(options).always(fail);
-    } else {
-        return $.ajax(options).always(disableFunc);
-    }
-}
-
 $(document).ready(function () {
     var instance = $('#my-data').data().name;
-    console.log(instance);
 
     $('#buttonIAMRole').click(function (e) {
         buttonAjax($(this), {
             method: "POST",
             url: "/setIAMRole/" + instance,
-            data: {
-
-            },
+            data: {},
             success: function (data, textStatus, request) {
 
             },
@@ -62,13 +14,11 @@ $(document).ready(function () {
             }
         });
     });
-    $('#buttonScaling').click(function (e) {				            
+    $('#buttonScaling').click(function (e) {
         buttonAjax($(this), {
             method: "POST",
             url: "/setScaling/" + instance,
-            data: {
-
-            },
+            data: {},
             success: function (data, textStatus, request) {
 
             },
@@ -81,9 +31,7 @@ $(document).ready(function () {
         buttonAjax($(this), {
             method: "POST",
             url: "/setType/" + instance,
-            data: {
-
-            },
+            data: {},
             success: function (data, textStatus, request) {
 
             },
@@ -93,12 +41,10 @@ $(document).ready(function () {
         });
     });
     $('#buttonTermination').click(function (e) {
-         buttonAjax($(this), {
+        buttonAjax($(this), {
             method: "POST",
             url: "/setTermination/" + instance,
-            data: {
-
-            },
+            data: {},
             success: function (data, textStatus, request) {
 
             },
@@ -108,12 +54,10 @@ $(document).ready(function () {
         });
     });
     $('#buttonUserData').click(function (e) {
-          buttonAjax($(this), {
+        buttonAjax($(this), {
             method: "POST",
             url: "/setUserData/" + instance,
-            data: {
-
-            },
+            data: {},
             success: function (data, textStatus, request) {
 
             },
@@ -123,12 +67,10 @@ $(document).ready(function () {
         });
     });
     $('#buttonT2').click(function (e) {
-           buttonAjax($(this), {
+        buttonAjax($(this), {
             method: "POST",
             url: "/setT2/" + instance,
-            data: {
-
-            },
+            data: {},
             success: function (data, textStatus, request) {
 
             },
@@ -138,12 +80,10 @@ $(document).ready(function () {
         });
     });
     $('#buttonModifyInstance').click(function (e) {
-            buttonAjax($(this), {
+        buttonAjax($(this), {
             method: "POST",
             url: "/setModifyInstance/" + instance,
-            data: {
-
-            },
+            data: {},
             success: function (data, textStatus, request) {
 
             },
@@ -152,28 +92,12 @@ $(document).ready(function () {
             }
         });
     });
-    $('#buttonNewInstance').click(function (e) {
-             buttonAjax($(this), {
-            method: "POST",
-            url: "/setNewInstance/" + instance,
-            data: {
 
-            },
-            success: function (data, textStatus, request) {
-
-            },
-            error: function (data, textStatus, request) {
-
-            }
-        });
-    });
     $('#buttonStart').click(function (e) {
-         buttonAjax($(this), {
+        buttonAjax($(this), {
             method: "POST",
             url: "/setStart/" + instance,
-            data: {
-
-            },
+            data: {},
             success: function (data, textStatus, request) {
 
             },
@@ -183,12 +107,10 @@ $(document).ready(function () {
         });
     });
     $('#buttonStop').click(function (e) {
-         buttonAjax($(this), {
+        buttonAjax($(this), {
             method: "POST",
             url: "/setStop/" + instance,
-            data: {
-
-            },
+            data: {},
             success: function (data, textStatus, request) {
 
             },
@@ -198,12 +120,10 @@ $(document).ready(function () {
         });
     });
     $('#buttonReboot').click(function (e) {
-         buttonAjax($(this), {
+        buttonAjax($(this), {
             method: "POST",
             url: "/setReboot/" + instance,
-            data: {
-
-            },
+            data: {},
             success: function (data, textStatus, request) {
 
             },
@@ -213,12 +133,10 @@ $(document).ready(function () {
         });
     });
     $('#buttonKill').click(function (e) {
-         buttonAjax($(this), {
+        buttonAjax($(this), {
             method: "POST",
             url: "/setKill/" + instance,
-            data: {
-
-            },
+            data: {},
             success: function (data, textStatus, request) {
 
             },
@@ -228,12 +146,10 @@ $(document).ready(function () {
         });
     });
     $('#dropDownCreateImage').click(function (e) {
-         buttonAjax($(this), {
+        buttonAjax($(this), {
             method: "POST",
             url: "/setDownCreateImage/" + instance,
-            data: {
-
-            },
+            data: {},
             success: function (data, textStatus, request) {
 
             },
@@ -243,12 +159,10 @@ $(document).ready(function () {
         });
     });
     $('#dropDownBundleInstance').click(function (e) {
-         buttonAjax($(this), {
+        buttonAjax($(this), {
             method: "POST",
             url: "/setDownBundleInstance/" + instance,
-            data: {
-
-            },
+            data: {},
             success: function (data, textStatus, request) {
 
             },

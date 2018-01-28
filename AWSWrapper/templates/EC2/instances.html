@@ -16,20 +16,23 @@
             <li class="breadcrumb-item active"><a href="/EC2/instances">Instances</a></li>
         </ol>
         <h1 class="align-left">Instances</h1>
+        <div class="btn-group btn-block">
+            <button id="buttonNewInstance" type="button" class="btn btn-primary btn-block">Launch New Instance</button>
+        </div>
         <hr>
         <!-- Icon Cards-->
         <div class="row">
 
             {% for instance in instances %}
-                {% set instance = instances[instance][0]%}
-	
+                {% set instance = instances[instance][0] %}
+
                 <div class="col-xl-3 col-sm-6 mb-3">
                     <div class="card text-white bg-{{ instance.State.Name }} o-hidden h-100">
                         <div class="card-body">
                             <div class="card-body-icon">
                                 {% if instance.State.Name == 'running' %}
                                     <i class="fas fa-circle"></i>
-				    {% elif instance.State.Name == 'pending' or instance.State.Name == 'shutting-down' or instance.State.Name == 'stopping' %}
+                                {% elif instance.State.Name == 'pending' or instance.State.Name == 'shutting-down' or instance.State.Name == 'stopping' %}
                                     <i class="fas fa-spin fa-circle-notch"></i>
                                 {% elif instance.State.Name == 'terminated' %}
                                     <i class="fas fa-trash-alt"></i>
@@ -70,6 +73,25 @@
     {% include "include/logout.html" %}
 
     {% include "include/scripts.html" %}
+
+    <script>
+        $(document).ready(function () {
+            $('#buttonNewInstance').click(function (e) {
+                buttonAjax($(this), {
+                    method: "POST",
+                    url: "/setNewInstance/" + "ami-f63b1193",
+                    data: {},
+                    success: function (data, textStatus, request) {
+
+                    },
+                    error: function (data, textStatus, request) {
+
+                    }
+                });
+            });
+        });
+    </script>
+
 </div>
 </body>
 

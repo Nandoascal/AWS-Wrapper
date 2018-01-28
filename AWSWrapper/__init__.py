@@ -37,8 +37,9 @@ def setModifyInstance(instance_id=None):
     return jsonify({"result": "success"})
 
 
-@app.route("/setNewInstance/<instance_id>", methods=['POST'])
-def setNewInstance(instance_id=None):
+@app.route("/setNewInstance/<image_id>", methods=['POST'])
+def setNewInstance(image_id):
+    Instances.Instances().launch_instance(image_id)
     return jsonify({"result": "success"})
 
 
