@@ -1,4 +1,5 @@
 import boto3
+from botocore.exceptions import ClientError
 
 class Instance:
 
@@ -54,20 +55,20 @@ class Instance:
                 'virtualization_type': self.instance_id.virtualization_type,
                 'vpc_id': self.instance_id.vpc_id
             }
-        except Error as e:
+        except Exception as e:
             print(e)
 
 
     def turn_on(self):
         try:
-            response = ec2_client.start_instances(InstanceIds=[self.instance_id],
+            response = ec3_client.start_instances(InstanceIds=[self.instance_id],
                     DryRun=True)
         except ClientError as e:
             if 'DryRunOperation' not in str(e):
                 print('Your permissions are wrong')
                 raise
         try:
-            response = ec2_client.start_instances(InstanceIds=[self.instance_id],
+            response = ec3_client.start_instances(InstanceIds=[self.instance_id],
                     DryRun=False)
         except ClientError as e:
             print(e)
@@ -75,14 +76,14 @@ class Instance:
 
     def turn_off(self):
         try:
-            response = ec2_client.stop_instances(InstanceIds=[self.instance_id],
+            response = ec3_client.stop_instances(InstanceIds=[self.instance_id],
                     DryRun=True)
         except ClientError as e:
             if 'DryRunOperation' not in str(e):
                 print('Your permissions are fucked')
                 raise
         try:
-            response = ec2_client.stop_instances(InstanceIds=[self.instance_id],
+            response = ec3_client.stop_instances(InstanceIds=[self.instance_id],
                     DryRun=False)
         except ClientError as e:
             print(e)
@@ -90,14 +91,14 @@ class Instance:
 
     def reboot(self):
         try:
-            response = ec2_client.reboot_instances(InstanceIds=[self.instance_id],
+            response = ec3_client.reboot_instances(InstanceIds=[self.instance_id],
                     DryRun=True)
         except ClientError as e:
             if 'DryRunOperation' not in str(e):
                 print('Your permissions are fucked')
                 raise
         try:
-            response = ec2_client.reboot_instances(InstanceIds=[self.instance_id],
+            response = ec3_client.reboot_instances(InstanceIds=[self.instance_id],
                     DryRun=False)
         except ClientError as e:
             print(e)
@@ -105,14 +106,14 @@ class Instance:
 
     def terminate(self):
         try:
-            response = ec2_client.reboot_instances(InstanceIds=[self.instance_id],
+            response = ec3_client.reboot_instances(InstanceIds=[self.instance_id],
                     DryRun=True)
         except ClientError as e:
             if 'DryRunOperation' not in str(e):
                 print('Your permissions are fucked')
                 raise
         try:
-            response = ec2_client.reboot_instances(InstanceIds=[self.instance_id],
+            response = ec3_client.reboot_instances(InstanceIds=[self.instance_id],
                     DryRun=False)
         except ClientError as e:
             print(e)
