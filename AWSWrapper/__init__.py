@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from AWSWrapper import Instances
+from AWSWrapper import Instances, Instance
 
 app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://brickhack:' + password + '@' + ip + '/brickhack'
@@ -14,7 +14,7 @@ def home():
 
 @app.route("/EC2/instance/<instance_id>", methods=["GET"])
 def instance(instance_id=None):
-    instance = Instances.Instances().get_one_instance_info(instance_id)
+    instance = Instance.Instance(instance_id).get_info()
     return render_template("EC2/instance.html", instance=instance)
 
 
