@@ -19,8 +19,9 @@
                                 {% endif %}
                             </div>
 			</div>
-    <script type="text/javascript" src="/static/js/requests.js"></script>
+    <script src="/static/js/requests.js"></script>
     <meta id="my-data" data-name="{{instance.InstanceId}}">
+
       <div class="content-wrapper">
          <div class="content-fluid">
             <div class="m-3">
@@ -28,6 +29,7 @@
 	<div class="p-3">	
 
 	      	<div class="m-2">
+			<h1> {% if instance.Tags is defined %}
 				{%for tag in instance.Tags%}
 					{% if tag.Key == "Name"%}
 						{{tag.Value}}
@@ -75,9 +77,6 @@
                         <div class="card  o-hidden h-100">
                            <div class="card-body">
                               <h6> Instance </h6>
-                              <hr>
-                              <div class="container">
-                                 <div class="row">
                                     <div class="col">
                                        ID
                                        <hr>
@@ -598,6 +597,9 @@
 				       {% else %}
 				       -
 				       {% endif %}
+                                                </div>
+                                             </div>
+                                          </div>
                                                 </div>
                                              </div>
                                           </div>
