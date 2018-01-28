@@ -1,4 +1,5 @@
 import boto3
+import Instance
 
 ec2_resource = boto3.resource('ec2')
 ec2_client = boto3.client('ec2')
@@ -8,6 +9,12 @@ class Instances:
 
     def __init__(self):
         self.instance_list = []
+        get_existing_instances()
+
+
+    def get_existing_instances():
+        for instance in ec2_resource.instances.all():
+            self.instance_list.append()
 
     def get_all_info(self):
         instances_info = {}
@@ -15,6 +22,7 @@ class Instances:
         for instance in self.instance_list:
             instances_info[instance.instance_id] = instance.get_info()
         return instances_info
+
 
     ### Add key pair functionality to both ###
     def launch_named_instance(self, name, image_id):
