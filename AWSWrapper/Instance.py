@@ -1,11 +1,10 @@
 import boto3
 from botocore.exceptions import ClientError
 
+ec3_resource = boto3.resource('ec2')
+ec3_client = boto3.client('ec2')
+
 class Instance:
-
-
-    ec3_resource = boto3.resource('ec2')
-    ec3_client = boto3.client('ec2')
 
 
     def __init__(self, instance_id):
