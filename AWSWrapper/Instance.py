@@ -18,7 +18,7 @@ class Instance:
 
         info = ec2_client.describe_instances(InstanceIds=[self.instance_id])
 
-        return info
+        return info['Reservations'][0]['Instances']
 
 
     def turn_on(self):
