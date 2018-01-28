@@ -6,15 +6,38 @@
       <div class="content-wrapper">
          <div class="content-fluid">
             <div class="m-3">
+		  <div class="p-3">
+		  {%include "include/buttons.html"%}
+		  </div>
                <div class="nav nav-tabs" id="nav-tab" role="tablist">
                   <a class="nav-item nav-link active" data-toggle="tab" href="#description">Description</a>
                   <a class="nav-item nav-link" data-toggle="tab" href="#status">Status</a>
                   <a class="nav-item nav-link" data-toggle="tab" href="#monitoring">Monitoring</a>
-                  <a class="nav-item nav-link" data-toggle="tab" href="#monitoring">Tags</a>
-               </div>
+                  <a class="nav-item nav-link" data-toggle="tab" href="#tags">Tags</a>
+	       </div>
 	       {%set instance =  instance[0] %}
 	       <div class="tab-content" id="nav-tabContent">
                   <div id="description" class="tab-pane fade show active p-3">
+			<div class="p-2"> 
+			  <div class="card o-hidden h-100">
+				  <div class="card-body">
+			 		<div class="row">
+						<div class="col py-2">
+
+							<div class="btn btn-primary center-block" style="width:100%">IAM Role</div>
+							</div><div class="col py-2">
+								<div class="btn btn-primary center-block" style="width:100%">Auto Scaling Group</div></div><div class="col py-2">
+								<div class="btn btn-primary center-block" style="width:100%">Instance Type</div></div><div class="col py-2">
+								<div class="btn btn-primary center-block" style="width:100%">Termination Protection</div></div><div class="col py-2">
+								<div class="btn btn-primary center-block" style="width:100%">User Data</div></div><div class = "col py-2">
+								<div class="btn btn-primary center-block" style="width:100%">T2 Unlimited</div></div><div class="col py-2">
+								<div class="btn btn-primary center-block" style="width:100%">Modify Instance Placement</div></div>
+
+
+						  </div>`
+					</div>
+			 	
+		  </div></div>
                      <div class="p-2">
                         <div class="card  o-hidden h-100">
                            <div class="card-body">
@@ -570,7 +593,7 @@
                   <div id="tags" class="tab-pane fade p-2">
                      <div class="card  o-hidden h-100">
                         <div class="card-body">
-                           put more profanity here
+				<button id="add_tags" class="btn btn-success center-block" style="width:100%"> Edit Tags </button>
                         </div>
                      </div>
                   </div>
