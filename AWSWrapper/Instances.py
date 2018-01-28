@@ -12,9 +12,14 @@ class Instances:
         self.instance_list = []
         self.add_existing_instances()
 
+
     def add_existing_instances(self):
         for instance in ec2_resource.instances.all():
             self.instance_list.append(Instance(instance.id))
+
+
+    def get_all_instances(self):
+        return self.instance_list
 
 
     def get_all_info(self):
@@ -24,26 +29,37 @@ class Instances:
             instances_info[instance.instance_id] = instance.get_info()
         return instances_info
 
-    # Add key pair functionality to both #
-    def launch_named_instance(self, name, image_id):
-        instance = ec2_resource.create_instances(
-            ImageId=image_id,
-            MaxCount=1,
-            MinCount=1,
-            TagSpecifications=[
-                {
-                    'ResourceType': 'instance',
-                    'Tags': {
-                        'Key': 'Name',
-                        'Value': name
-                    }
-                }
-            ]
-        )
+    # Test that this actually works if you don't enter anything
+    # Also add key pair creation
+    def launch_instance(self, image_id, KeyPair=None, Name=None):
 
-    def launch_instance(self, image_id):
-        instance = ec2_resource.create_instances(
-            ImageId=image_id,
-            MaxCount=1,
-            MinCount=1
-        )
+        if not Name:
+            tag_specs = []
+        else:
+            tag_specs = [
+                    {
+                        'ResourceType': 'instance',
+                        'Tags': [
+                            {
+                                'Key': 'Name',
+                                'Value': Name
+                            }
+                        ]
+                    }
+                ]
+
+        if not KeyPair:
+            instance = ec2_resource.create_instances(
+                    ImageId=image_id,
+                    MaxCount=1,
+                    MinCount=1,
+                    TagSpecifications=tag_specs
+                )
+        else:
+            instance = ec2_resource.create_instances(
+                ImageId=image_id,
+                MaxCount=1,
+                MinCount=1,
+                KeyName=KeyPair,
+                TagSpecifications=tag_specs
+            )
