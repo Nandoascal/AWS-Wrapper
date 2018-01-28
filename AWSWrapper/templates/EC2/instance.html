@@ -1,689 +1,735 @@
 <!DOCTYPE html>
 <html lang="en">
-   {% include "include/head.html" %}
-   <body class="sticky-footer bg-dark" id="page-top">
-	   {% include "include/nav.html" %}
-      {% include "include/scripts.html" %}
-                    {%set instance =  instance[0] %}
-			  </div>
-			<div class="card" style="border:0px">
-			<div class="card-body-icon" style="font-size: 150px; opacity:0.5;">
-                                {% if instance.State.Name == 'running' %}
-                                    <i class="fas fa-power-off" style="color:green"></i>
-                                    {% elif instance.State.Name == 'pending' or instance.State.Name == 'shutting-down' or instance.State.Name == 'stopping' %}
-                                    <i class="fas fa-spin fa-circle-notch" style="color:yellow"></i>
-                                {% elif instance.State.Name == 'terminated' %}
-                                    <i class="fas fa-trash-alt" style="color:red"></i>
-                                {% elif instance.State.Name == 'stopped' %}
-                                    <i class="fas fa-power-off" style="color:red"></i>
-                                {% endif %}
+{% include "include/head.html" %}
+<body class="sticky-footer bg-dark" id="page-top">
+{% include "include/nav.html" %}
+{% include "include/scripts.html" %}
+{% set instance =  instance[0] %}
+<div class="card" style="border:0px">
+    <div class="card-body-icon" style="font-size: 150px; opacity:0.5;">
+        {% if instance.State.Name == 'running' %}
+            <i class="fas fa-power-off" style="color:green"></i>
+        {% elif instance.State.Name == 'pending' or instance.State.Name == 'shutting-down' or instance.State.Name == 'stopping' %}
+            <i class="fas fa-spin fa-circle-notch" style="color:yellow"></i>
+        {% elif instance.State.Name == 'terminated' %}
+            <i class="fas fa-trash-alt" style="color:red"></i>
+        {% elif instance.State.Name == 'stopped' %}
+            <i class="fas fa-power-off" style="color:red"></i>
+        {% endif %}
+    </div>
+</div>
+<script src="/static/js/requests.js"></script>
+<meta id="my-data" data-name="{{ instance.InstanceId }}">
+
+<div class="content-wrapper">
+    <div class="content-fluid">
+        <div class="m-3">
+
+            <div class="p-3">
+
+                <div class="m-2">
+                    <h1> {% if instance.Tags is defined %}
+                        {% for tag in instance.Tags %}
+                            {% if tag.Key == "Name" %}
+                                {{ tag.Value }}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    </h1>
+                    <hr>
+                </div>
+                <div class="py-3">
+                    {% include "include/buttons.html" %}
+                </div>
+
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" data-toggle="tab" href="#description">Description</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#status">Status</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#monitoring">Monitoring</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#tags">Tags</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#networking">Networking</a>
+                </div>
+                <div class="tab-content" id="nav-tabContent">
+                    <div id="description" class="tab-pane fade show active p-2">
+                        <div class="p-2">
+                            <div class="card o-hidden">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col py-2">
+
+                                            <div id="buttonIAMRole" class="btn btn-primary center-block"
+                                                 style="width:100%">IAM Role
+                                            </div>
+                                        </div>
+                                        <div class="col py-2">
+                                            <div id="buttonScaling" class="btn btn-primary center-block"
+                                                 style="width:100%">Auto Scaling Group
+                                            </div>
+                                        </div>
+                                        <div class="col py-2">
+                                            <div id="buttonType" class="btn btn-primary center-block"
+                                                 style="width:100%">Instance Type
+                                            </div>
+                                        </div>
+                                        <div class="col py-2">
+                                            <div id="buttonTermination" class="btn btn-primary center-block"
+                                                 style="width:100%">Termination Protection
+                                            </div>
+                                        </div>
+                                        <div class="col py-2">
+                                            <div id="buttonUserData" class="btn btn-primary center-block"
+                                                 style="width:100%">User Data
+                                            </div>
+                                        </div>
+                                        <div class="col py-2">
+                                            <div id="buttonT2" class="btn btn-primary center-block" style="width:100%">
+                                                T2 Unlimited
+                                            </div>
+                                        </div>
+                                        <div class="col py-2">
+                                            <div id="buttonModifyInstance" class="btn btn-primary center-block"
+                                                 style="width:100%">Modify Instance Placement
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
                             </div>
-			</div>
-    <script src="/static/js/requests.js"></script>
-    <meta id="my-data" data-name="{{instance.InstanceId}}">
+                        </div>
+                        <div class="p-2">
+                            <div class="card  o-hidden h-100">
+                                <div class="card-body">
+                                    <h6> Instance </h6>
+                                    <hr>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col">
+                                                ID
+                                                <hr>
 
-      <div class="content-wrapper">
-         <div class="content-fluid">
-            <div class="m-3">
+                                                {% if instance.InstanceId is defined %}
+                                                    {{ instance.InstanceId }}
+                                                {% else %}
+                                                    -
+                                                {% endif %}
+                                            </div>
+                                            <div class="col">
+                                                STATE
+                                                <hr>
+                                                {% if instance.State.Name is defined %}
+                                                    {{ instance.State.Name }}
+                                                {% else %}
+                                                    -
+                                                {% endif %}
+                                            </div>
+                                            <div class="col">
+                                                TYPE
+                                                <hr>
 
-	<div class="p-3">	
+                                                {% if instance.InstanceType is defined %}
+                                                    {{ instance.InstanceType }}
+                                                {% else %}
+                                                    -
+                                                {% endif %}
+                                            </div>
+                                            <div class="col">
+                                                KEY PAIR NAME
+                                                <hr>
 
-	      	<div class="m-2">
-			<h1> {% if instance.Tags is defined %}
-				{%for tag in instance.Tags%}
-					{% if tag.Key == "Name"%}
-						{{tag.Value}}
-					{% endif %}
-				{% endfor %}
-				{%endif%}
-			</h1>
-			<hr>
-		</div>
-		<div class="py-3">
-	    {%include "include/buttons.html"%}
-		</div>
+                                                {% if instance.KeyName is defined %}
+                                                    {{ instance.KeyName }}
+                                                {% else %}
+                                                    -
+                                                {% endif %}
 
-
-
-
-               <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                  <a class="nav-item nav-link active" data-toggle="tab" href="#description">Description</a>
-                  <a class="nav-item nav-link" data-toggle="tab" href="#status">Status</a>
-                  <a class="nav-item nav-link" data-toggle="tab" href="#monitoring">Monitoring</a>
-                  <a class="nav-item nav-link" data-toggle="tab" href="#tags">Tags</a>
-		  <a class="nav-item nav-link" data-toggle="tab" href="#networking">Networking</a>
-	       </div>
-	       <div class="tab-content" id="nav-tabContent">
-                  <div id="description" class="tab-pane fade show active p-2">
-			  <div class="p-2" > 
-			  <div class="card o-hidden">
-				  <div class="card-body">
-					<div class="row">	
-			  		  <div class="col py-2">
-
-						  <div id="buttonIAMRole" class="btn btn-primary center-block" style="width:100%">IAM Role</div>
-							</div><div class="col py-2">
-								<div id="buttonScaling" class="btn btn-primary center-block" style="width:100%">Auto Scaling Group</div></div><div class="col py-2">
-								<div id="buttonType" class="btn btn-primary center-block" style="width:100%">Instance Type</div></div><div class="col py-2">
-								<div id="buttonTermination" class="btn btn-primary center-block" style="width:100%">Termination Protection</div></div><div class="col py-2">
-								<div id="buttonUserData" class="btn btn-primary center-block" style="width:100%">User Data</div></div><div class = "col py-2">
-								<div id="buttonT2"class="btn btn-primary center-block" style="width:100%">T2 Unlimited</div></div><div class="col py-2">
-								<div id="buttonModifyInstance" class="btn btn-primary center-block" style="width:100%">Modify Instance Placement</div></div>
-
-
-					</div>
-				  </div></div></div>
-                     <div class="p-2">
-                        <div class="card  o-hidden h-100">
-                           <div class="card-body">
-                              <h6> Instance </h6>
-                                    <div class="col">
-                                       ID
-                                       <hr>
-
-				       {% if instance.InstanceId is defined %}
-				       {{ instance.InstanceId }}
-				       {% else %}
-				       -
-				       {% endif %}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col">
-                                       STATE
-                                       <hr>
-				       {% if instance.State.Name is defined %}
-				       {{ instance.State.Name }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                    </div>
-                                    <div class="col">
-                                       TYPE
-                                       <hr>
-				       
-				       {% if instance.InstanceType is defined %}
-				       {{ instance.InstanceType }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                    </div>
-                                    <div class="col">
-                                       KEY PAIR NAME
-                                       <hr>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-2">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="pb-2">
+                                        <div class="card o-hidden ">
+                                            <div class="card-body">
+                                                <h6> IP Information </h6>
+                                                <hr>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="p-2">
+                                                                ELASTIC IPS
+                                                                <hr>
+                                                                <p ALIGN=RIGHT>
+                                                                    -
+                                                                </p>
+                                                            </div>
+                                                            <div class="p-2">
+                                                                IPV4 PUBLIC IP
+                                                                <hr>
+                                                                <p ALIGN=RIGHT>
 
-				       {% if instance.KeyName is defined %}
-				       {{ instance.KeyName }}
-				       {% else %}
-				       -
-				       {% endif %}
-				    
+                                                                    {% if instance.Fuck is defined %}
+                                                                        {{ instance.Fuck }}
+                                                                    {% else %}
+                                                                        -
+                                                                    {% endif %}
+                                                                </p>
+                                                            </div>
+                                                            <div class="p-2">
+                                                                AVAILABILITY ZONE
+                                                                <hr>
+                                                                <p ALIGN=RIGHT>
+
+                                                                    {% if instance.Placement.AvailabilityZone is defined %}
+                                                                        {{ instance.PlacementAvailabilityZone }}
+                                                                    {% else %}
+                                                                        -
+                                                                    {% endif %}
+                                                                </p>
+                                                            </div>
+                                                            <div class="p-2">
+                                                                PUBLIC DNS (IPV4)
+                                                                <hr>
+                                                                <p ALIGN=RIGHT>
+
+                                                                    {% if instance.PublicDnsName is defined %}
+                                                                        {{ instance.PublicDnsName }}
+                                                                    {% else %}
+                                                                        -
+                                                                    {% endif %}
+                                                                </p>
+                                                            </div>
+
+                                                            <div class="p-2">
+                                                                NETWORK INTERFACES
+                                                                <hr>
+                                                                <p ALIGN=RIGHT>
+
+                                                                    {% if instance.NetworkInterfaces.Description is defined %}
+                                                                        {{ instance.NetworkInterfaces.Description }}
+                                                                    {% else %}
+                                                                        -
+                                                                    {% endif %}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="p-2">
+                                                                IPV6 IPS
+                                                                <hr>
+                                                                <p ALIGN=RIGHT>
+
+                                                                    {% if instance.Fuck is defined %}
+                                                                        {{ instance.Fuck }}
+                                                                    {% else %}
+                                                                        -
+                                                                    {% endif %}
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="p-2">
+                                                                PRIVATE DNS
+                                                                <hr>
+                                                                <p ALIGN=RIGHT>
+
+                                                                    {% if instance.PrivateDnsName is defined %}
+                                                                        {{ instance.PrivateDnsName }}
+                                                                    {% else %}
+                                                                        -
+                                                                    {% endif %}
+                                                                </p>
+                                                            </div>
+                                                            <div class="p-2">
+                                                                PRIVATE IPS
+                                                                <hr>
+                                                                <p ALIGN=RIGHT>
+
+                                                                    {% if instance.NetworkInterfaces[0].PrivateIpAddresses[0]is defined %}
+                                                                        {{ instance.NetworkInterfaces[0].PrivateIpAddresses[0] }}
+                                                                    {% else %}
+                                                                        -
+                                                                    {% endif %}
+                                                            </div>
+                                                            <div class="p-2">
+                                                                SECONDARY PRIVATE IPS
+                                                                <hr>
+                                                                <p ALIGN=RIGHT>
+
+                                                                    {% if instance.PrivateIpAddress is defined %}
+                                                                        {{ instance.PrivateIpAddress }}
+                                                                    {% else %}
+                                                                        -
+                                                                    {% endif %}
+                                                                </p>
+                                                            </div>
+                                                            <div class="p-2">
+                                                                VPC ID
+                                                                <hr>
+                                                                <p ALIGN=RIGHT>
+
+                                                                    {% if instance.VpcId is defined %}
+                                                                        {{ instance.VpcId }}
+                                                                    {% else %}
+                                                                        -
+                                                                    {% endif %}
+
+                                                                </p>
+                                                            </div>
+                                                            <div class="p-2">
+                                                                SUBNET ID
+                                                                <hr>
+                                                                <p ALIGN=RIGHT>
+
+                                                                    {% if instance.SubnetId is defined %}
+                                                                        {{ instance.SubnetId }}
+                                                                    {% else %}
+                                                                        -
+                                                                    {% endif %}
+                                                                </p>
+                                                                <div class="p-2">
+                                                                    SOURCE / DEST.CHECK
+                                                                    <hr>
+                                                                    <p ALIGN=RIGHT>
+
+                                                                        {% if instance.SourceDestCheck is defined %}
+                                                                            {{ instance.SourceDestCheck }}
+                                                                        {% else %}
+                                                                            -
+                                                                        {% endif %}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                 </div>
-                              </div>
-                           </div>
+                                    <div class="pb-2">
+                                        <div class="card o-hidden h-50">
+                                            <div class="card-body">
+                                                <h6> Monitoring </h6>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="p-2">
+                                                            MONITORING
+                                                            <hr>
+
+                                                            {% if instance.Monitoring.State is defined %}
+                                                                {{ instance.Monitoring.State }}
+                                                            {% else %}
+                                                                -
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="p-2">
+                                                            ALARM STATUS
+                                                            <hr>
+
+                                                            {% if instance.Fuck is defined %}
+                                                                {{ instance.Fuck }}
+                                                            {% else %}
+                                                                -
+                                                            {% endif %}
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pb-2">
+                                        <div class="card o-hidden h-50">
+                                            <div class="card-body">
+                                                <h6> Time </h6>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="p-2">
+                                                            LAUNCH TIME
+                                                            <hr>
+
+                                                            {% if instance.LaunchTime is defined %}
+                                                                {{ instance.LaunchTime }}
+                                                            {% else %}
+                                                                -
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="p-2">
+                                                            LIFECYLE
+                                                            <hr>
+
+                                                            {% if instance.Fuck is defined %}
+                                                                {{ instance.Fuck }}
+                                                            {% else %}
+                                                                -
+                                                            {% endif %}
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="pb-2">
+                                        <div class="card o-hidden h-50">
+                                            <div class="card-body">
+                                                <h6> Security </h6>
+                                                <hr>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="p-2">
+                                                            SECURITY GROUPS
+                                                            <hr>
+
+                                                            {% if instance.SecurityGroups[0] is defined %}
+                                                                {{ instance.SecurityGroups[0] }}
+                                                            {% else %}
+                                                                -
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="p-2">
+                                                            TERMINATION PROTECTION
+                                                            <hr>
+
+                                                            {% if instance.Fuck is defined %}
+                                                                {{ instance.Fuck }}
+                                                            {% else %}
+                                                                -
+                                                            {% endif %}
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="p-2">
+                                                            SCHEDULED EVENTS
+                                                            <hr>
+
+                                                            {% if instance.Fuck is defined %}
+                                                                {{ instance.Fuck }}
+                                                            {% else %}
+                                                                -
+                                                            {% endif %}
+
+                                                        </div>
+                                                        <div class="p-2">
+                                                            OWNER
+                                                            <hr>
+
+                                                            {% if instance.NetworkInterfaces[0].OwnerId is defined %}
+                                                                {{ instance.NetworkInterfaces[0].OwnerId }}
+                                                            {% else %}
+                                                                -
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="pb-2">
+                                        <div class="card o-hidden h-50">
+                                            <div class="card-body">
+                                                <h6> OS Information</h6>
+                                                <hr>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="p-2">
+                                                                AIM ID
+                                                                <hr>
+
+                                                                {% if instance.Fuck is defined %}
+                                                                    {{ instance.Fuck }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+
+                                                            </div>
+                                                            <div class="p-2">
+                                                                PLATFORM
+                                                                <hr>
+
+                                                                {% if instance.Fuck is defined %}
+                                                                    {{ instance.Fuck }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class="p-2">
+                                                                ROOT DEVICE TYPE
+                                                                <hr>
+
+                                                                {% if instance.RootDeviceType is defined %}
+                                                                    {{ instance.RootDeviceType }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class="p-2">
+                                                                ROOT DEVICE
+                                                                <hr>
+
+                                                                {% if instance.RootDeviceName is defined %}
+                                                                    {{ instance.RootDeviceName }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+
+                                                            </div>
+                                                            <div class="p-2">
+                                                                VIRTUALIZATION
+                                                                <hr>
+
+                                                                {% if instance.Virtualization is defined %}
+                                                                    {{ instance.Virtualization }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class="p-2">
+                                                                HOST ID
+                                                                <hr>
+
+                                                                {% if instance.Fuck is defined %}
+                                                                    {{ instance.Fuck }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+
+                                                            </div>
+                                                            <div class="p-2">
+                                                                AFFINITY
+                                                                <hr>
+
+                                                                {% if instance.Fuck is defined %}
+                                                                    {{ instance.Fuck }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+
+                                                            </div>
+                                                            <div class="p-2">
+                                                                PLACEMENT GROUP
+                                                                <hr>
+
+                                                                {% if instance.Placement.GroupName is defined %}
+                                                                    {{ instance.Placement.GroupName }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+
+                                                            </div>
+                                                            <div class="p-2">
+                                                                STATE TRANSITION REASON
+                                                                <hr>
+                                                                {% if instance.StateReason is defined %}
+                                                                    {{ instance.StateReason.Code }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="p-2">
+                                                                BLOCK DEVICES
+                                                                <hr>
+                                                                {% if instance.BlockDeviceMappings is defined %}
+                                                                    {{ instance.BlockDeviceMappings }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class="p-2">
+                                                                ELASTIC GPU
+                                                                <hr>
+
+                                                                {% if instance.Fuck is defined %}
+                                                                    {{ instance.Fuck }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+
+                                                            </div>
+                                                            <div class="p-2">
+                                                                ELASTIC GPU TYPE
+                                                                <hr>
+
+                                                                {% if instance.Fuck is defined %}
+                                                                    {{ instance.Fuck }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+
+                                                            </div>
+                                                            <div class="p-2">
+                                                                ELASTIC GPU STATUS
+                                                                <hr>
+
+                                                                {% if instance.Fuck is defined %}
+                                                                    {{ instance.Fuck }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+
+                                                            </div>
+                                                            <div class="p-2">
+                                                                KERNEL ID
+                                                                <hr>
+
+                                                                {% if instance.Fuck is defined %}
+                                                                    {{ instance.Fuck }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+
+                                                            </div>
+                                                            <div class="p-2">
+                                                                RAM DISK ID
+                                                                <hr>
+
+                                                                {% if instance.Fuck is defined %}
+                                                                    {{ instance.Fuck }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+
+                                                            </div>
+                                                            <div class="p-2">
+                                                                AMI LAUNCH INDEX
+                                                                <hr>
+
+                                                                {% if instance.AmiLaunchIndex is defined %}
+                                                                    {{ instance.AmiLaunchIndex }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class="p-2">
+                                                                TENANCY
+                                                                <hr>
+
+                                                                {% if instance.Tenancy is defined %}
+                                                                    {{ instance.Tenancy }}
+                                                                {% else %}
+                                                                    -
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                     <div class="p-2">
-                        <div class="row">
-                           <div class="col">
-                              <div class="pb-2">
-                                 <div class="card o-hidden ">
-                                    <div class="card-body">
-                                       <h6> IP Information </h6>
-                                       <hr>
-                                       <div class="container">
-                                          <div class="row">
-                                             <div class="col">
-                                                <div class="p-2">
-                                                   ELASTIC IPS
-                                                   <hr>
-                                                   <p ALIGN=RIGHT>
-                                                      -
-                                                   </p>
-                                                </div>
-                                                <div class="p-2">
-                                                  IPV4 PUBLIC IP
-                                                   <hr>
-                                                   <p ALIGN=RIGHT>
-						   
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   </p>
-                                                </div>
-                                                <div class="p-2">
-                                                   AVAILABILITY ZONE
-                                                   <hr>
-                                                   <p ALIGN=RIGHT>
-
-				       {% if instance.Placement.AvailabilityZone is defined %}
-				       {{ instance.PlacementAvailabilityZone }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   </p>
-                                                </div>
-                                                <div class="p-2">
-                                                   PUBLIC DNS (IPV4)
-                                                   <hr>
-                                                   <p ALIGN=RIGHT>
-						  	
-				       {% if instance.PublicDnsName is defined %}
-				       {{ instance.PublicDnsName }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   </p>
-						</div>
-                                               
-                                                <div class = "p-2">
-                                                   NETWORK INTERFACES
-                                                   <hr>
-                                                   <p ALIGN=RIGHT>
-						  
-				       {% if instance.NetworkInterfaces.Description is defined %}
-				       {{ instance.NetworkInterfaces.Description }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   </p>
-                                                </div>
-                                             </div>
-                                             <div class="col">
-                                                <div class="p-2">
-                                                   IPV6 IPS
-                                                   <hr>
-                                                   <p ALIGN=RIGHT>
-                                               
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}   
-					       	   
-                                                   </p>
-                                                </div>
-                                                <div class="p-2">
-                                                   PRIVATE DNS
-                                                   <hr>
-                                                   <p ALIGN=RIGHT>
-						   
-				       {% if instance.PrivateDnsName is defined %}
-				       {{ instance.PrivateDnsName }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   </p>
-                                                </div>
-                                                <div class="p-2">
-                                                   PRIVATE IPS
-                                                   <hr>
-                                                   <p ALIGN=RIGHT>
-						  
-				       {% if instance.NetworkInterfaces[0].PrivateIpAddresses[0]is defined %}
-				       {{ instance.NetworkInterfaces[0].PrivateIpAddresses[0] }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                </div>
-                                                <div class="p-2">
-                                                   SECONDARY PRIVATE IPS
-                                                   <hr>
-                                                   <p ALIGN=RIGHT>
-						  
-				       {% if instance.PrivateIpAddress is defined %}
-				       {{ instance.PrivateIpAddress }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   </p>
-                                                </div>
-                                                <div class="p-2">
-                                                   VPC ID
-                                                   <hr>
-                                                   <p ALIGN=RIGHT>
-                                               
-				       {% if instance.VpcId is defined %}
-				       {{ instance.VpcId }}
-				       {% else %}
-				       -
-				       {% endif %}   
-						
-                                                   </p>
-                                                </div>
-                                                <div class="p-2">
-                                                   SUBNET ID
-                                                   <hr>
-                                                   <p ALIGN=RIGHT>
-						
-				       {% if instance.SubnetId is defined %}
-				       {{ instance.SubnetId }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   </p>
-                                                   <div class="p-2">
-                                                      SOURCE / DEST.CHECK
-                                                      <hr>
-                                                      <p ALIGN=RIGHT>
-						   	
-				       {% if instance.SourceDestCheck is defined %}
-				       {{ instance.SourceDestCheck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                      </p>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
+                    <div id="status" class="tab-pane fade p-2">
+                        <div class="card  o-hidden h-100">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="btn btn-success center-block" style="width:100%">Change Shutdown
+                                            Behavior
+                                        </div>
                                     </div>
-                                 </div>
-                              </div>
-                              <div class="pb-2">
-                                 <div class="card o-hidden h-50">
-                                    <div class="card-body">
-                                       <h6> Monitoring </h6>
-                                       <hr>
-                                       <div class="row">
-                                          <div class="col">
-                                             <div class = "p-2">
-                                                MONITORING
-                                                <hr>
-
-				       {% if instance.Monitoring.State is defined %}
-				       {{ instance.Monitoring.State }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                             </div>
-                                          </div>
-                                          <div class = "col">
-                                             <div class="p-2">
-                                                ALARM STATUS
-                                                <hr>
-
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="pb-2">
-                                 <div class="card o-hidden h-50">
-                                    <div class="card-body">
-                                       <h6> Time </h6>
-                                       <hr>
-                                       <div class="row">
-                                          <div class="col">
-                                             <div class = "p-2">
-                                                LAUNCH TIME
-                                                <hr>
-						
-				       {% if instance.LaunchTime is defined %}
-				       {{ instance.LaunchTime }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                             </div>
-                                          </div>
-                                          <div class = "col">
-                                             <div class="p-2">
-                                                LIFECYLE
-                                                <hr>
-						
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                           <div class="col">
-                              <div class="pb-2">
-                                 <div class="card o-hidden h-50">
-                                    <div class="card-body">
-                                       <h6> Security </h6>
-                                       <hr>
-                                       <div class="row">
-                                          <div class="col">
-                                             <div class = "p-2">
-                                                SECURITY GROUPS
-                                                <hr>
-
-				       {% if instance.SecurityGroups[0] is defined %}
-				       {{ instance.SecurityGroups[0] }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                             </div>
-                                             <div class="p-2">
-                                                TERMINATION PROTECTION
-                                                <hr>
-
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                
-                                             </div>
-                                          </div>
-                                          <div class = "col">
-                                             <div class="p-2">
-                                                SCHEDULED EVENTS
-                                                <hr>
-
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                
-                                             </div>
-                                             <div class="p-2">
-                                                OWNER
-                                                <hr>
-
-				       {% if instance.NetworkInterfaces[0].OwnerId is defined %}
-				       {{ instance.NetworkInterfaces[0].OwnerId }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="pb-2">
-                                 <div class="card o-hidden h-50">
-                                    <div class="card-body">
-                                       <h6> OS Information</h6>
-                                       <hr>
-                                       <div class ="container">
-                                          <div class="row">
-                                             <div class="col">
-                                                <div class ="p-2">
-                                                   AIM ID
-                                                   <hr>
-
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   
-                                                </div>
-                                                <div class ="p-2">
-                                                   PLATFORM
-                                                   <hr>
-                                                   
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                </div>
-                                                <div class="p-2">
-                                                   ROOT DEVICE TYPE
-                                                   <hr>
-						   
-				       {% if instance.RootDeviceType is defined %}
-				       {{ instance.RootDeviceType }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                </div>
-                                                <div class = "p-2">
-                                                   ROOT DEVICE
-                                                   <hr>
-						   
-				       {% if instance.RootDeviceName is defined %}
-				       {{ instance.RootDeviceName }}
-				       {% else %}
-				       -
-				       {% endif %}
-						  
-                                                </div>
-                                                <div class = "p-2">
-                                                   VIRTUALIZATION
-                                                   <hr>
-						  
-				       {% if instance.Virtualization is defined %}
-				       {{ instance.Virtualization }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                </div>
-                                                <div class = "p-2">
-                                                   HOST ID
-                                                   <hr>
-
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   
-                                                </div>
-                                                <div class = "p-2">
-                                                   AFFINITY
-                                                   <hr>
-
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   
-                                                </div>
-                                                <div class = "p-2">
-                                                   PLACEMENT GROUP
-                                                   <hr>
-						   
-				       {% if instance.Placement.GroupName is defined %}
-				       {{ instance.Placement.GroupName }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                             
-                                             </div>
-                                             <div class = "p-2">
-                                                STATE TRANSITION REASON
-                                                <hr>
-						{% if instance.StateReason is defined %}
-						{{instance.StateReason.Code}}
-						{% else %}
-						-
-						{% endif %}
-                  				</div>
-					     </div>	
-                                             <div class="col">
-                                                <div class = "p-2">
-                                                   BLOCK DEVICES
-                                                   <hr>
-				       {% if instance.BlockDeviceMappings is defined %}
-				       {{ instance.BlockDeviceMappings }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                </div>
-                                                <div class = "p-2">
-                                                   ELASTIC GPU
-                                                   <hr>
-
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   
-                                                </div>
-                                                <div class = "p-2">
-                                                   ELASTIC GPU TYPE
-                                                   <hr>
-
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   
-                                                </div>
-                                                <div class = "p-2">
-                                                   ELASTIC GPU STATUS
-                                                   <hr>
-
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   
-                                                </div>
-                                                <div class = "p-2">
-                                                   KERNEL ID
-                                                   <hr>
-
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                   
-                                                </div>
-                                                <div class="p-2">
-                                                   RAM DISK ID
-                                                   <hr>
-
-				       {% if instance.Fuck is defined %}
-				       {{ instance.Fuck }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                  
-                                                </div>
-                                                <div class = "p-2">
-                                                   AMI LAUNCH INDEX
-                                                   <hr>
-
-				       {% if instance.AmiLaunchIndex is defined %}
-				       {{ instance.AmiLaunchIndex }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                </div>
-                                                <div class = "p-2">
-                                                   TENANCY
-                                                   <hr>
-
-				       {% if instance.Tenancy is defined %}
-				       {{ instance.Tenancy }}
-				       {% else %}
-				       -
-				       {% endif %}
-                                                </div>
-                                             </div>
-                                          </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div id="status" class="tab-pane fade p-2">
-                     <div class="card  o-hidden h-100">
-                        <div class="card-body">
-				<div class="row">
-					<div class="col">
-				<div class="btn btn-success center-block" style="width:100%">Change Shutdown Behavior</div></div>
-				</div>
-			</div>
-		  </div>   
-                  </div>
-                  <div id="monitoring" class="tab-pane fade p-2">
-                     <div class="card  o-hidden h-100">
-                        <div class="card-body">
-				<div class="row">
-					<div class="col py-2">
-						<div class="btn btn-primary center-block" style="width:100%">View Logs</div> </div>
-					<div class="col py-2">
-						<div class="btn btn-primary center-block" style="width:100%">Get Instance Screenshot</div></div>
+                    </div>
+                    <div id="monitoring" class="tab-pane fade p-2">
+                        <div class="card  o-hidden h-100">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col py-2">
+                                        <div class="btn btn-primary center-block" style="width:100%">View Logs</div>
+                                    </div>
+                                    <div class="col py-2">
+                                        <div class="btn btn-primary center-block" style="width:100%">Get Instance
+                                            Screenshot
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-		     </div>
-		     </div>
-                  <div id="tags" class="tab-pane fade p-2">
-                     <div class="card  o-hidden h-100">
-                        <div class="card-body">
-				<button id="add_tags" class="btn btn-success center-block" style="width:100%"> Edit Tags </button>
+                    </div>
+                    <div id="tags" class="tab-pane fade p-2">
+                        <div class="card  o-hidden h-100">
+                            <div class="card-body">
+                                <button id="add_tags" class="btn btn-success center-block" style="width:100%"> Edit
+                                    Tags
+                                </button>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-		 <div id="networking" class="tab-pane fade p-2">
-                     <div class="card  o-hidden h-100">
-                        <div class="card-body">
-				<div class="row"> 
-					<div class="col py-2">	
-				<button id="add_tags" class="btn btn-primary center-block" style="width:100%"> Security Groups </button>
-					</div>
+                    </div>
+                    <div id="networking" class="tab-pane fade p-2">
+                        <div class="card  o-hidden h-100">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col py-2">
+                                        <button id="add_tags" class="btn btn-primary center-block" style="width:100%">
+                                            Security Groups
+                                        </button>
+                                    </div>
 
-					<div class="col py-2">	
-				<button id="add_tags" class="btn btn-success center-block" style="width:100%"> Attach Network Interface </button>
-					</div>
+                                    <div class="col py-2">
+                                        <button id="add_tags" class="btn btn-success center-block" style="width:100%">
+                                            Attach Network Interface
+                                        </button>
+                                    </div>
 
-					<div class="col py-2">	
-				<button id="add_tags" class="btn btn-danger center-block" style="width:100%"> Detach Network Interface </button>
-					</div>
+                                    <div class="col py-2">
+                                        <button id="add_tags" class="btn btn-danger center-block" style="width:100%">
+                                            Detach Network Interface
+                                        </button>
+                                    </div>
 
-					<div class="col py-2">	
-				<button id="add_tags" class="btn btn-warning center-block" style="width:100%"> Disassociate Elastic IP </button>
-					</div>
+                                    <div class="col py-2">
+                                        <button id="add_tags" class="btn btn-warning center-block" style="width:100%">
+                                            Disassociate Elastic IP
+                                        </button>
+                                    </div>
 
-					<div class="col py-2">	
-				<button id="add_tags" class="btn btn-primary center-block" style="width:100%"> Change Source </button>
-					</div>
+                                    <div class="col py-2">
+                                        <button id="add_tags" class="btn btn-primary center-block" style="width:100%">
+                                            Change Source
+                                        </button>
+                                    </div>
 
-					<div class="col py-2">	
-				<button id="add_tags" class="btn btn-primary center-block" style="width:100%"> Manage IPs</button>
-					</div>
-				</div>
+                                    <div class="col py-2">
+                                        <button id="add_tags" class="btn btn-primary center-block" style="width:100%">
+                                            Manage IPs
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-		 
-               </div>
+                    </div>
+
+                </div>
             </div>
-         </div>
-         <!-- /.container-fluid-->
-         <!-- /.content-wrapper-->
-         {% include "include/footer.html" %}
-         <!-- Scroll to Top Button-->
-         <a class="scroll-to-top rounded" href="#page-top">
-         <i class="fa fa-angle-up"></i>
-         </a>
-         {% include "include/logout.html" %}
-         {% include "include/scripts.html" %}
-      </div>
-   </body>
+        </div>
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    {% include "include/footer.html" %}
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fa fa-angle-up"></i>
+    </a>
+    {% include "include/logout.html" %}
+    {% include "include/scripts.html" %}
+</div>
+</body>
 </html>
