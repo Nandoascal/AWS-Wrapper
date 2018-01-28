@@ -8,7 +8,7 @@
 			<div class="card" style="border:0px">
 			<div class="card-body-icon" style="font-size: 150px; opacity:0.5;">
                                 {% if instance.State.Name == 'running' %}
-                                    <i class="fas fa-circle" style="color:green"></i>
+                                    <i class="fas fa-power-off" style="color:green"></i>
                                     {% elif instance.State.Name == 'pending' or instance.State.Name == 'shutting-down' or instance.State.Name == 'stopping' %}
                                     <i class="fas fa-spin fa-circle-notch" style="color:yellow"></i>
                                 {% elif instance.State.Name == 'terminated' %}
