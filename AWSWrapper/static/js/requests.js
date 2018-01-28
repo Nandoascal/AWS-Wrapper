@@ -44,13 +44,13 @@ function buttonAjax(buttonElem, options, failOnly) {
 }
 
 $(document).ready(function () {
-    var instance = $('#my-data').data();
+    var instance = $('#my-data').data().name;
     console.log(instance);
 
     $('#buttonIAMRole').click(function (e) {
         buttonAjax($(this), {
             method: "POST",
-            url: "/????",
+            url: "/setIAMRole/" + instance,
             data: {
 
             },
@@ -62,44 +62,200 @@ $(document).ready(function () {
             }
         });
     });
-    $('#buttonScaling').click(function (e) {
-        console.log("buttonscaling")
+    $('#buttonScaling').click(function (e) {				            
+        buttonAjax($(this), {
+            method: "POST",
+            url: "/setScaling/" + instance,
+            data: {
+
+            },
+            success: function (data, textStatus, request) {
+
+            },
+            error: function (data, textStatus, request) {
+
+            }
+        });
     });
     $('#buttonType').click(function (e) {
-        console.log("buttonType")
+        buttonAjax($(this), {
+            method: "POST",
+            url: "/setType/" + instance,
+            data: {
+
+            },
+            success: function (data, textStatus, request) {
+
+            },
+            error: function (data, textStatus, request) {
+
+            }
+        });
     });
     $('#buttonTermination').click(function (e) {
-        console.log("buttonTermination")
+         buttonAjax($(this), {
+            method: "POST",
+            url: "/setTermination/" + instance,
+            data: {
+
+            },
+            success: function (data, textStatus, request) {
+
+            },
+            error: function (data, textStatus, request) {
+
+            }
+        });
     });
     $('#buttonUserData').click(function (e) {
-        console.log("buttonUserData")
+          buttonAjax($(this), {
+            method: "POST",
+            url: "/setUserData/" + instance,
+            data: {
+
+            },
+            success: function (data, textStatus, request) {
+
+            },
+            error: function (data, textStatus, request) {
+
+            }
+        });
     });
     $('#buttonT2').click(function (e) {
-        console.log("buttonT2")
+           buttonAjax($(this), {
+            method: "POST",
+            url: "/setT2/" + instance,
+            data: {
+
+            },
+            success: function (data, textStatus, request) {
+
+            },
+            error: function (data, textStatus, request) {
+
+            }
+        });
     });
     $('#buttonModifyInstance').click(function (e) {
-        console.log("buttonModifyInstance")
+            buttonAjax($(this), {
+            method: "POST",
+            url: "/setModifyInstance/" + instance,
+            data: {
+
+            },
+            success: function (data, textStatus, request) {
+
+            },
+            error: function (data, textStatus, request) {
+
+            }
+        });
     });
     $('#buttonNewInstance').click(function (e) {
-        console.log("buttonNewInstance")
+             buttonAjax($(this), {
+            method: "POST",
+            url: "/setNewInstance/" + instance,
+            data: {
+
+            },
+            success: function (data, textStatus, request) {
+
+            },
+            error: function (data, textStatus, request) {
+
+            }
+        });
     });
     $('#buttonStart').click(function (e) {
-        console.log("buttonStart")
+         buttonAjax($(this), {
+            method: "POST",
+            url: "/setStart/" + instance,
+            data: {
+
+            },
+            success: function (data, textStatus, request) {
+
+            },
+            error: function (data, textStatus, request) {
+
+            }
+        });
     });
     $('#buttonStop').click(function (e) {
-        console.log("buttonStop")
+         buttonAjax($(this), {
+            method: "POST",
+            url: "/setStop/" + instance,
+            data: {
+
+            },
+            success: function (data, textStatus, request) {
+
+            },
+            error: function (data, textStatus, request) {
+
+            }
+        });
     });
     $('#buttonReboot').click(function (e) {
-        console.log("buttonReboot")
+         buttonAjax($(this), {
+            method: "POST",
+            url: "/setReboot/" + instance,
+            data: {
+
+            },
+            success: function (data, textStatus, request) {
+
+            },
+            error: function (data, textStatus, request) {
+
+            }
+        });
     });
     $('#buttonKill').click(function (e) {
-        console.log("buttonKill")
+         buttonAjax($(this), {
+            method: "POST",
+            url: "/setKill/" + instance,
+            data: {
+
+            },
+            success: function (data, textStatus, request) {
+
+            },
+            error: function (data, textStatus, request) {
+
+            }
+        });
     });
     $('#dropDownCreateImage').click(function (e) {
-        console.log("dropDownCreateImage")
+         buttonAjax($(this), {
+            method: "POST",
+            url: "/setDownCreateImage/" + instance,
+            data: {
+
+            },
+            success: function (data, textStatus, request) {
+
+            },
+            error: function (data, textStatus, request) {
+
+            }
+        });
     });
     $('#dropDownBundleInstance').click(function (e) {
-        console.log("dropDownBundleInstance")
+         buttonAjax($(this), {
+            method: "POST",
+            url: "/setDownBundleInstance/" + instance,
+            data: {
+
+            },
+            success: function (data, textStatus, request) {
+
+            },
+            error: function (data, textStatus, request) {
+
+            }
+        });
     });
 });
 
