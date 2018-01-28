@@ -22,7 +22,7 @@ class Instances:
         instances_info = {}
 
         for instance in self.instance_list:
-            instance_info[instance.instance_id] = instance.get_info()
+            instances_info[instance.instance_id] = instance.get_info()
 
 
     ### Add key pair functionality to both ###
