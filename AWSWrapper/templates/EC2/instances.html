@@ -6,7 +6,6 @@
 <body class="sticky-footer bg-dark" id="page-top">
 
 {% include "include/nav.html" %}
-
 <div class="content-wrapper">
     <div class="container-fluid">
         <!-- Breadcrumbs-->
@@ -22,29 +21,30 @@
         <div class="row">
 
             {% for instance in instances %}
-                {% set instance = instances[instance] %}
+                {% set instance = instances[instance][0]%}
+	
                 <div class="col-xl-3 col-sm-6 mb-3">
-                    <div class="card text-white bg-{{ instance.state }} o-hidden h-100">
+                    <div class="card text-white bg-{{ instance.State.Name }} o-hidden h-100">
                         <div class="card-body">
                             <div class="card-body-icon">
-                                {% if instance.state == 'running' %}
+                                {% if instance.State.Name == 'running' %}
                                     <i class="fas fa-circle"></i>
-                                {% elif instance.state == 'pending' or instance.state == 'shutting-down' or instance.state == 'stopping' %}
-                                    <i class="fas fa-pulse fa-spinner"></i>
-                                {% elif instance.state == 'terminated' %}
+				    {% elif instance.State.Name == 'pending' or instance.State.Name == 'shutting-down' or instance.State.Name == 'stopping' %}
+                                    <i class="fas fa-spin fa-circle-notch"></i>
+                                {% elif instance.State.Name == 'terminated' %}
                                     <i class="fas fa-trash-alt"></i>
-                                {% elif instance.state == 'stopped' %}
+                                {% elif instance.State.Name == 'stopped' %}
                                     <i class="fas fa-power-off"></i>
                                 {% endif %}
                             </div>
-                            {% if instance.tags != None %}
-                                {% for tag in instance.tags %}
+                            {% if instance.Tags != None %}
+                                {% for tag in instance.Tags %}
                                     {% if tag.Key == "Name" %}
                                         <h4 class="mr-5">{{ tag.Value }}</h4>
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}
-                            <div class="mr-6">{{ instance.public_ip }}</div>
+                            <div class="mr-6">{{ instance.PublicIpAddress }}</div>
                         </div>
 
                         <a class="card-footer text-white clearfix small z-1"
