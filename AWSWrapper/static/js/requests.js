@@ -1,0 +1,48 @@
+$(document).ready(function(){
+	var instance = $('#my-data').data();
+	console.log(instance)
+
+$('#buttonIAMRole').click(function(e){
+	console.log(shit);
+});
+$('#buttonScaling').click(function(e){
+	console.log("buttonscaling")
+});
+$('#buttonType').click(function(e){
+	console.log("buttonType")
+});
+$('#buttonTermination').click(function(e){
+	console.log("buttonTermination")
+});
+$('#buttonUserData').click(function(e){
+	console.log("buttonUserData")
+});
+$('#buttonT2').click(function(e){
+	console.log("buttonT2")
+});
+$('#buttonModifyInstance').click(function(e){
+	console.log("buttonModifyInstance")
+});
+$('#buttonNewInstance').click(function(e){
+	console.log("buttonNewInstance")
+});
+$('#buttonStart').click(function(e){
+	console.log("buttonStart")
+});
+$('#buttonStop').click(function(e){
+	console.log("buttonStop")
+});
+$('#buttonReboot').click(function(e){
+	console.log("buttonReboot")
+});
+$('#buttonKill').click(function(e){
+	console.log("buttonKill")
+});
+$('#dropDownCreateImage').click(function(e){
+	console.log("dropDownCreateImage")
+});
+$('#dropDownBundleInstance').click(function(e){
+	console.log("dropDownBundleInstance")
+});
+});
+
