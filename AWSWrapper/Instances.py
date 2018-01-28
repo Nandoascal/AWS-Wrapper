@@ -14,7 +14,7 @@ class Instances:
 
     def add_existing_instances(self):
         for instance in ec2_resource.instances.all():
-            self.instance_list.append(Instance.Instance(instance.id))
+            self.instance_list.append(Instance(instance.id))
 
 
     def get_all_info(self):
