@@ -30,7 +30,7 @@
                                 {% if instance.state == 'running' %}
                                     <i class="fas fa-circle"></i>
                                 {% elif instance.state == 'pending' or instance.state == 'shutting-down' or instance.state == 'stopping' %}
-                                    <i class="fas fa-spin fa-circle-notch"></i>
+                                    <i class="fas fa-pulse fa-spinner"></i>
                                 {% elif instance.state == 'terminated' %}
                                     <i class="fas fa-trash-alt"></i>
                                 {% elif instance.state == 'stopped' %}
