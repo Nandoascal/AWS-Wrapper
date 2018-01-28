@@ -1,5 +1,6 @@
 import boto3
-from AWSWrapper import Instance
+from Instance import Instance
+
 
 ec2_resource = boto3.resource('ec2')
 ec2_client = boto3.client('ec2')
@@ -9,11 +10,12 @@ class Instances:
 
     def __init__(self):
         self.instance_list = []
-        self.get_existing_instances()
+        self.add_existing_instances()
 
-    def get_existing_instances(self):
+    def add_existing_instances(self):
         for instance in ec2_resource.instances.all():
-            self.instance_list.append()
+            self.instance_list.append(Instance(instance.id))
+
 
     def get_all_info(self):
         instances_info = {}
