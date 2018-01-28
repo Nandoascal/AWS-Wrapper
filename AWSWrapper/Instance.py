@@ -21,7 +21,7 @@ class Instance:
         return info['Reservations'][0]['Instances']
 
 
-    def modify(attribute, value):
+    def modify(self, attribute, value):
         ec2_client.stop_instances(InstanceIds=[self.instance_id])
 
         waiter= ec2_client.get_waiter('instance_stopped')
@@ -33,6 +33,56 @@ class Instance:
 
         ec2_client.start_instances(InstanceIds=[self.instance_id])
 
+    def add_tag(self, instanceId):
+        response = ec2_client.create_tags(
+        Resources=[
+            instanceId,
+        ],
+        Tags=[
+            {
+                'Key': 'testTag',
+                'Value': 'Jack is a shit'
+            },
+        ]
+    )
+
+    def delete_tags(self, instanceId, key, value):
+        response = ec2_client.delete_tags(
+            Resources=[
+                instanceId,
+            ],
+            Tags=[
+                {
+                    'Key': key,
+                    'Value': value,
+                },
+            ],
+        )
+
+    def change_tags(self, instanceId, Key, Value, newKey, newValue):
+        response = ec2_client.delete_tags(
+            Resources=[
+                instanceId,
+            ],
+            Tags=[
+                {
+                    'Key': Key,
+                    'Value': Value,
+                },
+            ],
+        )
+
+        response = ec2_client.create_tags(
+            Resources=[
+                'i-085415335fc9aa3ae'
+            ],
+            Tags=[
+                {
+                    'Key': newKey,
+                    'Value': newValue,
+                },
+            ],
+        )
 
     def turn_on(self):
         try:
