@@ -25,28 +25,48 @@
                                     <div class="col">
                                        ID
                                        <hr>
+
+				       {% if instance.InstanceId is defined %}
 				       {{ instance.InstanceId }}
+				       {% else %}
+				       -
+				       {% endif %}
                                     </div>
                                     <div class="col">
                                        STATE
                                        <hr>
+				       {% if instance.State.Name is defined %}
 				       {{ instance.State.Name }}
+				       {% else %}
+				       -
+				       {% endif %}
                                     </div>
                                     <div class="col">
                                        TYPE
                                        <hr>
-				       {{ instance.InstanceType}}
+				       
+				       {% if instance.InstanceType is defined %}
+				       {{ instance.InstanceType }}
+				       {% else %}
+				       -
+				       {% endif %}
                                     </div>
                                     <div class="col">
                                        KEY PAIR NAME
                                        <hr>
+
+				       {% if instance.KeyName is defined %}
 				       {{ instance.KeyName }}
+				       {% else %}
+				       -
+				       {% endif %}
+				    
                                     </div>
                                  </div>
                               </div>
                            </div>
                         </div>
-                     </div>
+                    </div>
                      <div class="p-2">
                         <div class="row">
                            <div class="col">
@@ -69,21 +89,36 @@
                                                   IPV4 PUBLIC IP
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-						   -
+						   
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                    </p>
                                                 </div>
                                                 <div class="p-2">
                                                    AVAILABILITY ZONE
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-						   {{instance.Placement.AvailabilityZone}}
+
+				       {% if instance.Placement.AvailabilityZone is defined %}
+				       {{ instance.PlacementAvailabilityZone }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                    </p>
                                                 </div>
                                                 <div class="p-2">
                                                    PUBLIC DNS (IPV4)
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-						   {{instance.PublicDnsName}}
+						  	
+				       {% if instance.PublicDnsName is defined %}
+				       {{ instance.PublicDnsName }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                    </p>
 						</div>
                                                
@@ -91,7 +126,12 @@
                                                    NETWORK INTERFACES
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-						   {{instance.NetworkInterfaces.Description}}
+						  
+				       {% if instance.NetworkInterfaces.Description is defined %}
+				       {{ instance.NetworkInterfaces.Description }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                    </p>
                                                 </div>
                                              </div>
@@ -100,47 +140,84 @@
                                                    IPV6 IPS
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-                                                      here
+                                               
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}   
+					       	   
                                                    </p>
                                                 </div>
                                                 <div class="p-2">
                                                    PRIVATE DNS
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-						   {{instance.PrivateDnsName}}
+						   
+				       {% if instance.PrivateDnsName is defined %}
+				       {{ instance.PrivateDnsName }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                    </p>
                                                 </div>
                                                 <div class="p-2">
                                                    PRIVATE IPS
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-						   {{instance.NetworkInterfaces[0].PrivateIpAddresses[0]}}
+						  
+				       {% if instance.NetworkInterfaces[0].PrivateIpAddresses[0]is defined %}
+				       {{ instance.NetworkInterfaces[0].PrivateIpAddresses[0] }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                 </div>
                                                 <div class="p-2">
                                                    SECONDARY PRIVATE IPS
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-						   {{instance.PrivateIpAddress}}
+						  
+				       {% if instance.PrivateIpAddress is defined %}
+				       {{ instance.PrivateIpAddress }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                    </p>
                                                 </div>
                                                 <div class="p-2">
                                                    VPC ID
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-                                                     {{instance.VpcId}}
+                                               
+				       {% if instance.VpcId is defined %}
+				       {{ instance.VpcId }}
+				       {% else %}
+				       -
+				       {% endif %}   
+						
                                                    </p>
                                                 </div>
                                                 <div class="p-2">
                                                    SUBNET ID
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-						   {{instance.SubnetId}}
+						
+				       {% if instance.SubnetId is defined %}
+				       {{ instance.SubnetId }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                    </p>
                                                    <div class="p-2">
                                                       SOURCE / DEST.CHECK
                                                       <hr>
                                                       <p ALIGN=RIGHT>
-						      {{instance.SourceDestCheck}}
+						   	
+				       {% if instance.SourceDestCheck is defined %}
+				       {{ instance.SourceDestCheck }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                       </p>
                                                    </div>
                                                 </div>
@@ -160,14 +237,25 @@
                                              <div class = "p-2">
                                                 MONITORING
                                                 <hr>
-						{{instance.Monitoring.State}}
+
+				       {% if instance.Monitoring.State is defined %}
+				       {{ instance.Monitoring.State }}
+				       {% else %}
+				       -
+				       {% endif %}
                                              </div>
                                           </div>
                                           <div class = "col">
                                              <div class="p-2">
                                                 ALARM STATUS
                                                 <hr>
-                                                -
+
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
+                                                
                                              </div>
                                           </div>
                                        </div>
@@ -184,14 +272,25 @@
                                              <div class = "p-2">
                                                 LAUNCH TIME
                                                 <hr>
-						{{instance.LaunchTime}}
+						
+				       {% if instance.LaunchTime is defined %}
+				       {{ instance.LaunchTime }}
+				       {% else %}
+				       -
+				       {% endif %}
                                              </div>
                                           </div>
                                           <div class = "col">
                                              <div class="p-2">
                                                 LIFECYLE
                                                 <hr>
-                                                -
+						
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
+                                                
                                              </div>
                                           </div>
                                        </div>
@@ -210,24 +309,46 @@
                                              <div class = "p-2">
                                                 SECURITY GROUPS
                                                 <hr>
-						{{instance.SecurityGroups[0]}}
+
+				       {% if instance.SecurityGroups[0] is defined %}
+				       {{ instance.SecurityGroups[0] }}
+				       {% else %}
+				       -
+				       {% endif %}
                                              </div>
                                              <div class="p-2">
                                                 TERMINATION PROTECTION
                                                 <hr>
-                                                -
+
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
+                                                
                                              </div>
                                           </div>
                                           <div class = "col">
                                              <div class="p-2">
                                                 SCHEDULED EVENTS
                                                 <hr>
-                                                -
+
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
+                                                
                                              </div>
                                              <div class="p-2">
                                                 OWNER
                                                 <hr>
-						{{instance.NetworkInterfaces[0].OwnerId}}
+
+				       {% if instance.NetworkInterfaces[0].OwnerId is defined %}
+				       {{ instance.NetworkInterfaces[0].OwnerId }}
+				       {% else %}
+				       -
+				       {% endif %}
                                              </div>
                                           </div>
                                        </div>
@@ -245,89 +366,182 @@
                                                 <div class ="p-2">
                                                    AIM ID
                                                    <hr>
-                                                   -
+
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
+                                                   
                                                 </div>
                                                 <div class ="p-2">
                                                    PLATFORM
                                                    <hr>
-                                                   -
+                                                   
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                 </div>
                                                 <div class="p-2">
                                                    ROOT DEVICE TYPE
                                                    <hr>
-						   {{instance.RootDeviceType}}
+						   
+				       {% if instance.RootDeviceType is defined %}
+				       {{ instance.RootDeviceType }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                 </div>
                                                 <div class = "p-2">
                                                    ROOT DEVICE
                                                    <hr>
-						   {{instance.RootDeviceName}}
+						   
+				       {% if instance.RootDeviceName is defined %}
+				       {{ instance.RootDeviceName }}
+				       {% else %}
+				       -
+				       {% endif %}
+						  
                                                 </div>
                                                 <div class = "p-2">
                                                    VIRTUALIZATION
                                                    <hr>
-						   {{instance.Virtualization}}
+						  
+				       {% if instance.Virtualization is defined %}
+				       {{ instance.Virtualization }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                 </div>
                                                 <div class = "p-2">
                                                    HOST ID
                                                    <hr>
-                                                   -
+
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
+                                                   
                                                 </div>
                                                 <div class = "p-2">
                                                    AFFINITY
                                                    <hr>
-                                                   -
+
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
+                                                   
                                                 </div>
                                                 <div class = "p-2">
                                                    PLACEMENT GROUP
                                                    <hr>
-						   {{instance.Placement.GroupName}}
-                                                </div>
+						   
+				       {% if instance.Placement.GroupName is defined %}
+				       {{ instance.Placement.GroupName }}
+				       {% else %}
+				       -
+				       {% endif %}
+                                             
                                              </div>
                                              <div class = "p-2">
                                                 STATE TRANSITION REASON
                                                 <hr>
+						{% if instance.StateReason is defined %}
 						{{instance.StateReason.Code}}
-                                             </div>
+						{% else %}
+						-
+						{% endif %}
+                  				</div>
+					     </div>	
                                              <div class="col">
                                                 <div class = "p-2">
                                                    BLOCK DEVICES
                                                    <hr>
-						   {{instance.BlockDeviceMappings}}
+				       {% if instance.BlockDeviceMappings is defined %}
+				       {{ instance.BlockDeviceMappings }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                 </div>
                                                 <div class = "p-2">
                                                    ELASTIC GPU
                                                    <hr>
-                                                   -
+
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
+                                                   
                                                 </div>
                                                 <div class = "p-2">
                                                    ELASTIC GPU TYPE
                                                    <hr>
-                                                   -
+
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
+                                                   
                                                 </div>
                                                 <div class = "p-2">
                                                    ELASTIC GPU STATUS
                                                    <hr>
-                                                   -
+
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
+                                                   
                                                 </div>
                                                 <div class = "p-2">
                                                    KERNEL ID
                                                    <hr>
-                                                   -
+
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
+                                                   
                                                 </div>
                                                 <div class="p-2">
                                                    RAM DISK ID
                                                    <hr>
-                                                   -
+
+				       {% if instance.Fuck is defined %}
+				       {{ instance.Fuck }}
+				       {% else %}
+				       -
+				       {% endif %}
+                                                  
                                                 </div>
                                                 <div class = "p-2">
                                                    AMI LAUNCH INDEX
                                                    <hr>
-						   {{instance.AmiLaunchIndex}}
+
+				       {% if instance.AmiLaunchIndex is defined %}
+				       {{ instance.AmiLaunchIndex }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                 </div>
                                                 <div class = "p-2">
                                                    TENANCY
                                                    <hr>
-						   {{instance.Placement.Tenancy}}
+
+				       {% if instance.Tenancy is defined %}
+				       {{ instance.Tenancy }}
+				       {% else %}
+				       -
+				       {% endif %}
                                                 </div>
                                              </div>
                                           </div>
