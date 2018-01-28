@@ -1,159 +1,391 @@
 <!DOCTYPE html>
 <html lang="en">
-
-{% include "include/head.html" %}
-
-<body class="sticky-footer bg-dark" id="page-top">
-
-{% include "include/nav.html" %}
-
-<div class="content-wrapper">
-    <div class="content-fluid">
-        <div class="m-3">
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" data-toggle="tab" href="#description">Description</a>
-                <a class="nav-item nav-link" data-toggle="tab" href="#status">Status</a>
-	        <a class="nav-item nav-link" data-toggle="tab" href="#monitoring">Monitoring</a>
-       		<a class="nav-item nav-link" data-toggle="tab" href="#monitoring">Tags</a>
-
-            </div>
-
-            <div class="tab-content" id="nav-tabContent">
-                <div id="description" class="tab-pane fade show active p-3">
-                    <div class="p-2">
+   {% include "include/head.html" %}
+   <body class="sticky-footer bg-dark" id="page-top">
+      {% include "include/nav.html" %}
+      <div class="content-wrapper">
+         <div class="content-fluid">
+            <div class="m-3">
+               <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <a class="nav-item nav-link active" data-toggle="tab" href="#description">Description</a>
+                  <a class="nav-item nav-link" data-toggle="tab" href="#status">Status</a>
+                  <a class="nav-item nav-link" data-toggle="tab" href="#monitoring">Monitoring</a>
+                  <a class="nav-item nav-link" data-toggle="tab" href="#monitoring">Tags</a>
+               </div>
+               <div class="tab-content" id="nav-tabContent">
+                  <div id="description" class="tab-pane fade show active p-3">
+                     <div class="p-2">
                         <div class="card  o-hidden h-100">
-                            <div class="card-body">
-                                <h6> Instance </h6>
-                                <hr>
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col">
-                                            ID
-                                            <hr>
-					    {{ instance }}
-                                            666
-                                        </div>
-                                        <div class="col">
-                                            STATE
-                                            <hr>
-                                            fucked
-                                        </div>
-                                        <div class="col">
-                                            TYPE
-                                            <hr>
-                                            manic pixie dream girl
-                                        </div>
+                           <div class="card-body">
+                              <h6> Instance </h6>
+                              <hr>
+                              <div class="container">
+                                 <div class="row">
+                                    <div class="col">
+                                       ID
+                                       <hr>
+                                       {{ instance }}
+                                       666
                                     </div>
-                                </div>
-                            </div>
+                                    <div class="col">
+                                       STATE
+                                       <hr>
+                                       fucked
+                                    </div>
+                                    <div class="col">
+                                       TYPE
+                                       <hr>
+                                       manic pixie dream girl
+                                    </div>
+                                    <div class="col">
+                                       KEY PAIR NAME
+                                       <hr>
+                                       -
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
-                    </div>
-                    <div class="p-2">
+                     </div>
+                     <div class="p-2">
                         <div class="row">
-                            <div class="col">
-                                <div class="card o-hidden h-100">
+                           <div class="col">
+                              <div class="pb-2">
+                                 <div class="card o-hidden ">
                                     <div class="card-body">
-                                        <h6> IP Information </h6>
-                                        <hr>
-                                        <div class="container">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="p-2">
-                                                        ELASTIC IP
-                                                        <hr>
-                                                        <p ALIGN=RIGHT>
-                                                            666
-                                                        </p>
-                                                    </div>
-                                                    <div class="p-2">
-                                                        YOUR IP
-                                                        <hr>
-                                                        <p ALIGN=RIGHT>
-                                                            666.66.666.66
-                                                        </p>
-                                                    </div>
-                                                    <div class="p-2">
-                                                        IPV4
-                                                        <hr>
-                                                        <p ALIGN=RIGHT>
-                                                            this is what it is
-                                                        </p>
-                                                    </div>
+                                       <h6> IP Information </h6>
+                                       <hr>
+                                       <div class="container">
+                                          <div class="row">
+                                             <div class="col">
+                                                <div class="p-2">
+                                                   ELASTIC IP
+                                                   <hr>
+                                                   <p ALIGN=RIGHT>
+                                                      666
+                                                   </p>
                                                 </div>
-                                                <div class="col">
-                                                    AVAILABILITY ZONE
-                                                    <hr>
-                                                    <p ALIGN=RIGHT>
-                                                        here
-                                                    </p>
+                                                <div class="p-2">
+                                                   YOUR IP
+                                                   <hr>
+                                                   <p ALIGN=RIGHT>
+                                                      666.66.666.66
+                                                   </p>
                                                 </div>
-                                            </div>
-                                        </div>
+                                                <div class="p-2">
+                                                   IPV4
+                                                   <hr>
+                                                   <p ALIGN=RIGHT>
+                                                      this is what it is
+                                                   </p>
+                                                </div>
+                                                <div class="p-2">
+                                                   AVAILABILITY ZONE
+                                                   <hr>
+                                                   <p ALIGN=RIGHT>
+                                                      here
+                                                   </p>
+                                                </div>
+                                                <div class="p-2">
+                                                   PUBLIC DNS (IPV4)
+                                                   <hr>
+                                                   <p ALIGN=RIGHT>
+                                                      here
+                                                   </p>
+                                                </div>
+                                                <div class="p-2">
+                                                   IPV4 PUBLIC IP
+                                                   <hr>
+                                                   <p ALIGN=RIGHT>
+                                                      here
+                                                   </p>
+                                                </div>
+                                                <div class = "p-2">
+                                                   NETWORK INTERFACES
+                                                   <hr>
+                                                   <p ALIGN=RIGHT>
+                                                      here
+                                                   </p>
+                                                </div>
+                                             </div>
+                                             <div class="col">
+                                                <div class="p-2">
+                                                   IPV6 IPS
+                                                   <hr>
+                                                   <p ALIGN=RIGHT>
+                                                      here
+                                                   </p>
+                                                </div>
+                                                <div class="p-2">
+                                                   PRIVATE DNS
+                                                   <hr>
+                                                   <p ALIGN=RIGHT>
+                                                      here
+                                                   </p>
+                                                </div>
+                                                <div class="p-2">
+                                                   PRIVATE IPS
+                                                   <hr>
+                                                   <p ALIGN=RIGHT>
+                                                      here
+                                                   </p>
+                                                </div>
+                                                <div class="p-2">
+                                                   SECONDARY PRIVATE IPS
+                                                   <hr>
+                                                   <p ALIGN=RIGHT>
+                                                      here
+                                                   </p>
+                                                </div>
+                                                <div class="p-2">
+                                                   VPC ID
+                                                   <hr>
+                                                   <p ALIGN=RIGHT>
+                                                      here
+                                                   </p>
+                                                </div>
+                                                <div class="p-2">
+                                                   SUBNET ID
+                                                   <hr>
+                                                   <p ALIGN=RIGHT>
+                                                      here
+                                                   </p>
+                                                   <div class="p-2">
+                                                      SOURCE / DEST.CHECK
+                                                      <hr>
+                                                      <p ALIGN=RIGHT>
+                                                         here
+                                                      </p>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="pb-2">
-                                    <div class="card o-hidden h-50">
-                                        <div class="card-body">
-                                            <h6> Security Groups </h6>
-                                            <hr>
-                                            you're in a couple
-                                        </div>
+                                 </div>
+                              </div>
+                              <div class="pb-2">
+                                 <div class="card o-hidden h-50">
+                                    <div class="card-body">
+                                       <h6> Monitoring </h6>
+                                       <hr>
+                                       <div class="row">
+                                          <div class="col">
+                                             <div class = "p-2">
+                                                MONITORING
+                                                <hr>
+                                                -
+                                             </div>
+                                          </div>
+                                          <div class = "col">
+                                             <div class="p-2">
+                                                ALARM STATUS
+                                                <hr>
+                                                -
+                                             </div>
+                                          </div>
+                                       </div>
                                     </div>
-                                </div>
-                                <div class="pb-2">
-                                    <div class="card o-hidden h-50">
-                                        <div class="card-body">
-                                            <h6> fuck me</h6>
-                                            <hr>
-                                            in the ass
-                                        </div>
+                                 </div>
+                              </div>
+                              <div class="pb-2">
+                                 <div class="card o-hidden h-50">
+                                    <div class="card-body">
+                                       <h6> Time </h6>
+                                       <hr>
+                                       <div class="row">
+                                          <div class="col">
+                                             <div class = "p-2">
+                                                LAUNCH TIME
+                                                <hr>
+                                                -
+                                             </div>
+                                          </div>
+                                          <div class = "col">
+                                             <div class="p-2">
+                                                LIFECYLE
+                                                <hr>
+                                                -
+                                             </div>
+                                          </div>
+                                       </div>
                                     </div>
-                                </div>
-                            </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col">
+                              <div class="pb-2">
+                                 <div class="card o-hidden h-50">
+                                    <div class="card-body">
+                                       <h6> Security </h6>
+                                       <hr>
+                                       <div class="row">
+                                          <div class="col">
+                                             <div class = "p-2">
+                                                SECURITY GROUPS
+                                                <hr>
+                                                you're in a couple
+                                             </div>
+                                             <div class="p-2">
+                                                TERMINATION PROTECTION
+                                                <hr>
+                                                fuck 
+                                             </div>
+                                          </div>
+                                          <div class = "col">
+                                             <div class="p-2">
+                                                SCHEDULED EVENTS
+                                                <hr>
+                                                fuck
+                                             </div>
+                                             <div class="p-2">
+                                                OWNER
+                                                <hr>
+                                                fuck 
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="pb-2">
+                                 <div class="card o-hidden h-50">
+                                    <div class="card-body">
+                                       <h6> OS Information</h6>
+                                       <hr>
+                                       <div class ="container">
+                                          <div class="row">
+                                             <div class="col">
+                                                <div class ="p-2">
+                                                   AIM ID
+                                                   <hr>
+                                                   -
+                                                </div>
+                                                <div class ="p-2">
+                                                   PLATFORM
+                                                   <hr>
+                                                   fuck
+                                                </div>
+                                                <div class="p-2">
+                                                   ROOT DEVICE TYPE
+                                                   <hr>
+                                                   fuck
+                                                </div>
+                                                <div class = "p-2">
+                                                   ROOT DEVICE
+                                                   <hr>
+                                                   fuck
+                                                </div>
+                                                <div class = "p-2">
+                                                   VIRTUALIZATION
+                                                   <hr>
+                                                   fuck
+                                                </div>
+                                                <div class = "p-2">
+                                                   HOST ID
+                                                   <hr>
+                                                   fuck
+                                                </div>
+                                                <div class = "p-2">
+                                                   AFFINITY
+                                                   <hr>
+                                                   fuck
+                                                </div>
+                                                <div class = "p-2">
+                                                   PLACEMENT GROUP
+                                                   <hr>
+                                                   fuck
+                                                </div>
+                                             </div>
+                                             <div class = "p-2">
+                                                STATE TRANSITION REASON
+                                                <hr>
+                                                fuck
+                                             </div>
+                                             <div class="col">
+                                                <div class = "p-2">
+                                                   BLOCK DEVICES
+                                                   <hr>
+                                                   fuck
+                                                </div>
+                                                <div class = "p-2">
+                                                   ELASTIC GPU
+                                                   <hr>
+                                                   fuck
+                                                </div>
+                                                <div class = "p-2">
+                                                   ELASTIC GPU TYPE
+                                                   <hr>
+                                                   fuck
+                                                </div>
+                                                <div class = "p-2">
+                                                   ELASTIC GPU STATUS
+                                                   <hr>
+                                                   fuck
+                                                </div>
+                                                <div class = "p-2">
+                                                   KERNEL ID
+                                                   <hr>
+                                                   -
+                                                </div>
+                                                <div class="p-2">
+                                                   RAM DISK ID
+                                                   <hr>
+                                                   -
+                                                </div>
+                                                <div class = "p-2">
+                                                   AMI LAUNCH INDEX
+                                                   <hr>
+                                                   fuck
+                                                </div>
+                                                <div class = "p-2">
+                                                   TENANCY
+                                                   <hr>
+                                                   fuck
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
-                    </div>
-                </div>
-                <div id="status" class="tab-pane fade p-2">
-                    <div class="card  o-hidden h-100">
+                     </div>
+                  </div>
+                  <div id="status" class="tab-pane fade p-2">
+                     <div class="card  o-hidden h-100">
                         <div class="card-body">
-                            put more profanity here
+                           put more profanity here
                         </div>
-                    </div>
-              	</div>
-		  <div id="monitoring" class="tab-pane fade p-2">
-                    <div class="card  o-hidden h-100">
+                     </div>
+                  </div>
+                  <div id="monitoring" class="tab-pane fade p-2">
+                     <div class="card  o-hidden h-100">
                         <div class="card-body">
-                            put more profanity here
+                           put more profanity here
                         </div>
-                    </div>
-                </div>
-              <div id="tags" class="tab-pane fade p-2">
-                    <div class="card  o-hidden h-100">
+                     </div>
+                  </div>
+                  <div id="tags" class="tab-pane fade p-2">
+                     <div class="card  o-hidden h-100">
                         <div class="card-body">
-                            put more profanity here
+                           put more profanity here
                         </div>
-                    </div>
-                </div> 
-	    </div>
-        </div>
-    </div>
-
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-
-    {% include "include/footer.html" %}
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fa fa-angle-up"></i>
-    </a>
-
-    {% include "include/logout.html" %}
-
-    {% include "include/scripts.html" %}
-</div>
-</body>
-
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- /.container-fluid-->
+         <!-- /.content-wrapper-->
+         {% include "include/footer.html" %}
+         <!-- Scroll to Top Button-->
+         <a class="scroll-to-top rounded" href="#page-top">
+         <i class="fa fa-angle-up"></i>
+         </a>
+         {% include "include/logout.html" %}
+         {% include "include/scripts.html" %}
+      </div>
+   </body>
 </html>
