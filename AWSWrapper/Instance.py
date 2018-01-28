@@ -14,6 +14,7 @@ class Instance:
 
 
     def get_info(self):
+        info = {}
 
         try:
             info={
@@ -58,6 +59,8 @@ class Instance:
             }
         except Exception as e:
             print(e)
+
+        return info
 
 
     def turn_on(self):
