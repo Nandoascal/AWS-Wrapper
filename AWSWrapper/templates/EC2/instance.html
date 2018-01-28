@@ -6,23 +6,40 @@
       <div class="content-wrapper">
          <div class="content-fluid">
             <div class="m-3">
-		  <div class="p-3">
-		  {%include "include/buttons.html"%}
 		  </div>
+               {%set instance =  instance[0] %}
+		<div class="p-3">
+	      	<div class="m-2">
+			<h1> {% if instance.Tags is defined %}
+				{%for tag in instance.Tags%}
+					{% if tag.Key == "Name"%}
+						{{tag.Value}}
+					{% endif %}
+				{% endfor %}
+				{%endif%}
+			</h1>
+			<hr>
+		</div>
+		<div class="py-3">
+	    {%include "include/buttons.html"%}
+		</div>
+
+	
+
                <div class="nav nav-tabs" id="nav-tab" role="tablist">
                   <a class="nav-item nav-link active" data-toggle="tab" href="#description">Description</a>
                   <a class="nav-item nav-link" data-toggle="tab" href="#status">Status</a>
                   <a class="nav-item nav-link" data-toggle="tab" href="#monitoring">Monitoring</a>
                   <a class="nav-item nav-link" data-toggle="tab" href="#tags">Tags</a>
+		  <a class="nav-item nav-link" data-toggle="tab" href="#networking">Networking</a>
 	       </div>
-	       {%set instance =  instance[0] %}
 	       <div class="tab-content" id="nav-tabContent">
-                  <div id="description" class="tab-pane fade show active p-3">
-			<div class="p-2"> 
-			  <div class="card o-hidden h-100">
+                  <div id="description" class="tab-pane fade show active p-2">
+			  <div class="p-2" > 
+			  <div class="card o-hidden">
 				  <div class="card-body">
-			 		<div class="row">
-						<div class="col py-2">
+					<div class="row">	
+			  		  <div class="col py-2">
 
 							<div class="btn btn-primary center-block" style="width:100%">IAM Role</div>
 							</div><div class="col py-2">
@@ -34,10 +51,8 @@
 								<div class="btn btn-primary center-block" style="width:100%">Modify Instance Placement</div></div>
 
 
-						  </div>`
 					</div>
-			 	
-		  </div></div>
+				  </div></div></div>
                      <div class="p-2">
                         <div class="card  o-hidden h-100">
                            <div class="card-body">
@@ -579,17 +594,25 @@
                   <div id="status" class="tab-pane fade p-2">
                      <div class="card  o-hidden h-100">
                         <div class="card-body">
-                           put more profanity here
-                        </div>
-                     </div>
+				<div class="row">
+					<div class="col">
+				<div class="btn btn-success center-block" style="width:100%">Change Shutdown Behavior</div></div>
+				</div>
+			</div>
+		  </div>   
                   </div>
                   <div id="monitoring" class="tab-pane fade p-2">
                      <div class="card  o-hidden h-100">
                         <div class="card-body">
-                           put more profanity here
+				<div class="row">
+					<div class="col py-2">
+						<div class="btn btn-primary center-block" style="width:100%">View Logs</div> </div>
+					<div class="col py-2">
+						<div class="btn btn-primary center-block" style="width:100%">Get Instance Screenshot</div></div>
                         </div>
                      </div>
-                  </div>
+		     </div>
+		     </div>
                   <div id="tags" class="tab-pane fade p-2">
                      <div class="card  o-hidden h-100">
                         <div class="card-body">
@@ -597,6 +620,38 @@
                         </div>
                      </div>
                   </div>
+		 <div id="networking" class="tab-pane fade p-2">
+                     <div class="card  o-hidden h-100">
+                        <div class="card-body">
+				<div class="row"> 
+					<div class="col py-2">	
+				<button id="add_tags" class="btn btn-primary center-block" style="width:100%"> Security Groups </button>
+					</div>
+
+					<div class="col py-2">	
+				<button id="add_tags" class="btn btn-success center-block" style="width:100%"> Attach Network Interface </button>
+					</div>
+
+					<div class="col py-2">	
+				<button id="add_tags" class="btn btn-danger center-block" style="width:100%"> Detach Network Interface </button>
+					</div>
+
+					<div class="col py-2">	
+				<button id="add_tags" class="btn btn-warning center-block" style="width:100%"> Disassociate Elastic IP </button>
+					</div>
+
+					<div class="col py-2">	
+				<button id="add_tags" class="btn btn-primary center-block" style="width:100%"> Change Source </button>
+					</div>
+
+					<div class="col py-2">	
+				<button id="add_tags" class="btn btn-primary center-block" style="width:100%"> Manage IPs</button>
+					</div>
+				</div>
+                        </div>
+                     </div>
+                  </div>
+		 
                </div>
             </div>
          </div>
@@ -611,4 +666,4 @@
          {% include "include/scripts.html" %}
       </div>
    </body>
-</html>
+   </htmlv class="btn btn-primary center-block" style="width:100%">IAM Role</div>>
