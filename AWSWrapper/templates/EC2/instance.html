@@ -12,7 +12,8 @@
                   <a class="nav-item nav-link" data-toggle="tab" href="#monitoring">Monitoring</a>
                   <a class="nav-item nav-link" data-toggle="tab" href="#monitoring">Tags</a>
                </div>
-               <div class="tab-content" id="nav-tabContent">
+	       {%set instance =  instance[0] %}
+	       <div class="tab-content" id="nav-tabContent">
                   <div id="description" class="tab-pane fade show active p-3">
                      <div class="p-2">
                         <div class="card  o-hidden h-100">
@@ -24,23 +25,22 @@
                                     <div class="col">
                                        ID
                                        <hr>
-                                       {{ instance }}
-                                       666
+				       {{ instance.InstanceId }}
                                     </div>
                                     <div class="col">
                                        STATE
                                        <hr>
-                                       fucked
+				       {{ instance.State.Name }}
                                     </div>
                                     <div class="col">
                                        TYPE
                                        <hr>
-                                       manic pixie dream girl
+				       {{ instance.InstanceType}}
                                     </div>
                                     <div class="col">
                                        KEY PAIR NAME
                                        <hr>
-                                       -
+				       {{ instance.KeyName }}
                                     </div>
                                  </div>
                               </div>
@@ -59,52 +59,39 @@
                                           <div class="row">
                                              <div class="col">
                                                 <div class="p-2">
-                                                   ELASTIC IP
+                                                   ELASTIC IPS
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-                                                      666
+                                                      -
                                                    </p>
                                                 </div>
                                                 <div class="p-2">
-                                                   YOUR IP
+                                                  IPV4 PUBLIC IP
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-                                                      666.66.666.66
-                                                   </p>
-                                                </div>
-                                                <div class="p-2">
-                                                   IPV4
-                                                   <hr>
-                                                   <p ALIGN=RIGHT>
-                                                      this is what it is
+						   -
                                                    </p>
                                                 </div>
                                                 <div class="p-2">
                                                    AVAILABILITY ZONE
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-                                                      here
+						   {{instance.Placement.AvailabilityZone}}
                                                    </p>
                                                 </div>
                                                 <div class="p-2">
                                                    PUBLIC DNS (IPV4)
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-                                                      here
+						   {{instance.PublicDnsName}}
                                                    </p>
-                                                </div>
-                                                <div class="p-2">
-                                                   IPV4 PUBLIC IP
-                                                   <hr>
-                                                   <p ALIGN=RIGHT>
-                                                      here
-                                                   </p>
-                                                </div>
+						</div>
+                                               
                                                 <div class = "p-2">
                                                    NETWORK INTERFACES
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-                                                      here
+						   {{instance.NetworkInterfaces.Description}}
                                                    </p>
                                                 </div>
                                              </div>
@@ -120,41 +107,40 @@
                                                    PRIVATE DNS
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-                                                      here
+						   {{instance.PrivateDnsName}}
                                                    </p>
                                                 </div>
                                                 <div class="p-2">
                                                    PRIVATE IPS
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-                                                      here
-                                                   </p>
+						   {{instance.NetworkInterfaces[0].PrivateIpAddresses[0]}}
                                                 </div>
                                                 <div class="p-2">
                                                    SECONDARY PRIVATE IPS
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-                                                      here
+						   {{instance.PrivateIpAddress}}
                                                    </p>
                                                 </div>
                                                 <div class="p-2">
                                                    VPC ID
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-                                                      here
+                                                     {{instance.VpcId}}
                                                    </p>
                                                 </div>
                                                 <div class="p-2">
                                                    SUBNET ID
                                                    <hr>
                                                    <p ALIGN=RIGHT>
-                                                      here
+						   {{instance.SubnetId}}
                                                    </p>
                                                    <div class="p-2">
                                                       SOURCE / DEST.CHECK
                                                       <hr>
                                                       <p ALIGN=RIGHT>
-                                                         here
+						      {{instance.SourceDestCheck}}
                                                       </p>
                                                    </div>
                                                 </div>
@@ -174,7 +160,7 @@
                                              <div class = "p-2">
                                                 MONITORING
                                                 <hr>
-                                                -
+						{{instance.Monitoring.State}}
                                              </div>
                                           </div>
                                           <div class = "col">
@@ -198,7 +184,7 @@
                                              <div class = "p-2">
                                                 LAUNCH TIME
                                                 <hr>
-                                                -
+						{{instance.LaunchTime}}
                                              </div>
                                           </div>
                                           <div class = "col">
@@ -224,24 +210,24 @@
                                              <div class = "p-2">
                                                 SECURITY GROUPS
                                                 <hr>
-                                                you're in a couple
+						{{instance.SecurityGroups[0]}}
                                              </div>
                                              <div class="p-2">
                                                 TERMINATION PROTECTION
                                                 <hr>
-                                                fuck 
+                                                -
                                              </div>
                                           </div>
                                           <div class = "col">
                                              <div class="p-2">
                                                 SCHEDULED EVENTS
                                                 <hr>
-                                                fuck
+                                                -
                                              </div>
                                              <div class="p-2">
                                                 OWNER
                                                 <hr>
-                                                fuck 
+						{{instance.NetworkInterfaces[0].OwnerId}}
                                              </div>
                                           </div>
                                        </div>
@@ -264,64 +250,64 @@
                                                 <div class ="p-2">
                                                    PLATFORM
                                                    <hr>
-                                                   fuck
+                                                   -
                                                 </div>
                                                 <div class="p-2">
                                                    ROOT DEVICE TYPE
                                                    <hr>
-                                                   fuck
+						   {{instance.RootDeviceType}}
                                                 </div>
                                                 <div class = "p-2">
                                                    ROOT DEVICE
                                                    <hr>
-                                                   fuck
+						   {{instance.RootDeviceName}}
                                                 </div>
                                                 <div class = "p-2">
                                                    VIRTUALIZATION
                                                    <hr>
-                                                   fuck
+						   {{instance.Virtualization}}
                                                 </div>
                                                 <div class = "p-2">
                                                    HOST ID
                                                    <hr>
-                                                   fuck
+                                                   -
                                                 </div>
                                                 <div class = "p-2">
                                                    AFFINITY
                                                    <hr>
-                                                   fuck
+                                                   -
                                                 </div>
                                                 <div class = "p-2">
                                                    PLACEMENT GROUP
                                                    <hr>
-                                                   fuck
+						   {{instance.Placement.GroupName}}
                                                 </div>
                                              </div>
                                              <div class = "p-2">
                                                 STATE TRANSITION REASON
                                                 <hr>
-                                                fuck
+						{{instance.StateReason.Code}}
                                              </div>
                                              <div class="col">
                                                 <div class = "p-2">
                                                    BLOCK DEVICES
                                                    <hr>
-                                                   fuck
+						   {{instance.BlockDeviceMappings}}
                                                 </div>
                                                 <div class = "p-2">
                                                    ELASTIC GPU
                                                    <hr>
-                                                   fuck
+                                                   -
                                                 </div>
                                                 <div class = "p-2">
                                                    ELASTIC GPU TYPE
                                                    <hr>
-                                                   fuck
+                                                   -
                                                 </div>
                                                 <div class = "p-2">
                                                    ELASTIC GPU STATUS
                                                    <hr>
-                                                   fuck
+                                                   -
                                                 </div>
                                                 <div class = "p-2">
                                                    KERNEL ID
@@ -336,12 +322,12 @@
                                                 <div class = "p-2">
                                                    AMI LAUNCH INDEX
                                                    <hr>
-                                                   fuck
+						   {{instance.AmiLaunchIndex}}
                                                 </div>
                                                 <div class = "p-2">
                                                    TENANCY
                                                    <hr>
-                                                   fuck
+						   {{instance.Placement.Tenancy}}
                                                 </div>
                                              </div>
                                           </div>
