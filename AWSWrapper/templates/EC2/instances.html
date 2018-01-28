@@ -50,7 +50,7 @@
                             <div class="mr-6">{{ instance.PublicIpAddress }}</div>
                         </div>
 
-                        {% if instance.State.Name == 'terminated' %}
+                        {% if instance.State.Name != 'terminated' %}
                             <a class="card-footer text-white clearfix small z-1"
                                href="/EC2/instance/{{ instance.InstanceId }}">
                                 <span class="float-left">View Details</span>
