@@ -8,12 +8,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="/">
-                    <i class="fa fa-fw fa-window-restore"></i>
-                    <span class="nav-link-text">Dashboard</span>
-                </a>
-            </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="EC2">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseEC2"
                    data-parent="#exampleAccordion">
@@ -27,6 +21,54 @@
                             <i class="fa fa-fw fa-window-restore"></i>
                             <span class="nav-link-text">Instances</span>
                         </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="S3">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseS3"
+                   data-parent="#exampleAccordion">
+                    <i class="fas fa-hdd"></i>
+                    <span class="nav-link-text">S3</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseS3">
+                    <li>
+
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Lambda">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseLambda"
+                   data-parent="#exampleAccordion">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span class="nav-link-text">Lambda</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseLambda">
+                    <li>
+
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Batch">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseBatch"
+                   data-parent="#exampleAccordion">
+                    <i class="fas fa-code-branch"></i>
+                    <span class="nav-link-text">Batch</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseBatch">
+                    <li>
+
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="EFS">
+                <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseEFS"
+                   data-parent="#exampleAccordion">
+                    <i class="fas fa-archive"></i>
+                    <span class="nav-link-text">EFS</span>
+                </a>
+                <ul class="sidenav-second-level collapse" id="collapseEFS">
+                    <li>
+
                     </li>
                 </ul>
             </li>
@@ -44,7 +86,7 @@
                    aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-fw fa-bell"></i>
                     <span class="d-lg-none">Alerts
-              <span class="badge badge-pill badge-warning">6 New</span>
+              <span class="badge badge-pill badge-warning">3 New</span>
             </span>
                     <span class="indicator text-warning d-none d-lg-block">
               <i class="fa fa-fw fa-circle"></i>

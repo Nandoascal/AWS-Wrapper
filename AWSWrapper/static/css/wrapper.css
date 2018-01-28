@@ -37,7 +37,7 @@ button.bg-stopping:hover,
 button.bg-stopping:focus,
 a.bg-shutting-down:hover, a.bg-shutting-down:focus,
 button.bg-shutting-down:hover,
-button.bg-shutting-down:focus{
+button.bg-shutting-down:focus {
     background-color: #d39e00 !important;
 }
 
@@ -52,4 +52,12 @@ a.bg-stopped:hover, a.bg-stopped:focus,
 button.bg-stopped:hover,
 button.bg-stopped:focus {
     background-color: #bd2130 !important;
+}
+
+.bg-purple {
+    background-color: #8d2fff !important;
+}
+
+.bg-green {
+    background-color: #34cb58 !important;
 }
