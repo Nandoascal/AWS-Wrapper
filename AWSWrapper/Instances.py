@@ -14,8 +14,8 @@ class Instances:
     def get_all_info(self):
         instances_info = {}
 
-        for instance in instance_list:
-            instance_info[instance.instance_id] = instance.get_info()
+        for instance in self.instance_list:
+            instances_info[instance.instance_id] = instance.get_info()
 
     ### Add key pair functionality to both ###
     def launch_named_instance(self, name, image_id):
