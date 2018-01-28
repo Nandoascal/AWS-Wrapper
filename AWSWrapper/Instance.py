@@ -21,6 +21,19 @@ class Instance:
         return info['Reservations'][0]['Instances']
 
 
+    def modify(attribute, value):
+        ec2_client.stop_instances(InstanceIds=[self.instance_id])
+
+        waiter= ec2_client.get_waiter('instance_stopped')
+        waiter.wait(InstanceIds=[self.instance_id])
+
+        ec2_client.modify_instance_attribute(InstanceId=self.instance_id,
+                Attribute=attribute,
+                Value=value)
+
+        ec2_client.start_instances(InstanceIds=[self.instance_id])
+
+
     def turn_on(self):
         try:
             response = ec2_client.start_instances(InstanceIds=[self.instance_id],
