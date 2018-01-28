@@ -2,7 +2,8 @@
 <html lang="en">
    {% include "include/head.html" %}
    <body class="sticky-footer bg-dark" id="page-top">
-      {% include "include/nav.html" %}
+	   {% include "include/nav.html" %}
+      {% include "include/scripts.html" %}
                     {%set instance =  instance[0] %}
 			  </div>
 			<div class="card" style="border:0px">
@@ -18,7 +19,7 @@
                                 {% endif %}
                             </div>
 			</div>
-
+    <script src="/static/js/requests.js"></script>
 
       <div class="content-wrapper">
          <div class="content-fluid">
@@ -59,14 +60,14 @@
 					<div class="row">	
 			  		  <div class="col py-2">
 
-							<div class="btn btn-primary center-block" style="width:100%">IAM Role</div>
+						  <div id="buttonIAMRole" class="btn btn-primary center-block" style="width:100%">IAM Role</div>
 							</div><div class="col py-2">
-								<div class="btn btn-primary center-block" style="width:100%">Auto Scaling Group</div></div><div class="col py-2">
-								<div class="btn btn-primary center-block" style="width:100%">Instance Type</div></div><div class="col py-2">
-								<div class="btn btn-primary center-block" style="width:100%">Termination Protection</div></div><div class="col py-2">
-								<div class="btn btn-primary center-block" style="width:100%">User Data</div></div><div class = "col py-2">
-								<div class="btn btn-primary center-block" style="width:100%">T2 Unlimited</div></div><div class="col py-2">
-								<div class="btn btn-primary center-block" style="width:100%">Modify Instance Placement</div></div>
+								<div id="buttonScaling" class="btn btn-primary center-block" style="width:100%">Auto Scaling Group</div></div><div class="col py-2">
+								<div id="buttonType" class="btn btn-primary center-block" style="width:100%">Instance Type</div></div><div class="col py-2">
+								<div id="buttonTermination" class="btn btn-primary center-block" style="width:100%">Termination Protection</div></div><div class="col py-2">
+								<div id="buttonUserData" class="btn btn-primary center-block" style="width:100%">User Data</div></div><div class = "col py-2">
+								<div id="buttonT2"class="btn btn-primary center-block" style="width:100%">T2 Unlimited</div></div><div class="col py-2">
+								<div id="buttonModifyInstance" class="btn btn-primary center-block" style="width:100%">Modify Instance Placement</div></div>
 
 
 					</div>
@@ -684,4 +685,4 @@
          {% include "include/scripts.html" %}
       </div>
    </body>
-   </htmlv class="btn btn-primary center-block" style="width:100%">IAM Role</div>>
+</html>
