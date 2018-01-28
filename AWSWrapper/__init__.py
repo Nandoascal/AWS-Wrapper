@@ -6,48 +6,80 @@ app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://brickhack:' + password + '@' + ip + '/brickhack'
 db = SQLAlchemy(app)
 
-@app.route("/setIAMRole/<instance_id>",methods=['POST'] )
+
+@app.route("/setIAMRole/<instance_id>", methods=['POST'])
 def setIAMRole(instance_id=None):
-    return (jsonify({"result":"success"}))
+    return jsonify({"result": "success"})
+
+
 @app.route("/setScaling/<instance_id>", methods=['POST'])
 def setScaling(instance_id=None):
-    return(jsonify({"result":"success"}))
+    return jsonify({"result": "success"})
+
+
 @app.route("/setType/<instance_id>", methods=['POST'])
 def setType(instance_id=None):
-    return(jsonify({"result":"success"}))
+    return jsonify({"result": "success"})
+
+
 @app.route("/setTermination/<instance_id>", methods=['POST'])
 def setTermination(instance_id=None):
-    return(jsonify({"result":"success"}))
+    return jsonify({"result": "success"})
+
+
 @app.route("/setUserData/<instance_id>", methods=['POST'])
 def setUserData(instance_id=None):
-    return(jsonify({"result":"success"}))
+    return jsonify({"result": "success"})
+
+
 @app.route("/setModifyInstance/<instance_id>", methods=['POST'])
 def setModifyInstance(instance_id=None):
-    return(jsonify({"result":"success"}))
+    return jsonify({"result": "success"})
+
+
 @app.route("/setNewInstance/<instance_id>", methods=['POST'])
 def setNewInstance(instance_id=None):
-    return(jsonify({"result":"success"}))
+    return jsonify({"result": "success"})
+
+
 @app.route("/setStart/<instance_id>", methods=['POST'])
 def setStart(instance_id=None):
-    return(jsonify({"result":"success"}))
+    Instance.Instance(instance_id).turn_on()
+    return jsonify({"result": "success"})
+
+
 @app.route("/setStop/<instance_id>", methods=['POST'])
 def setStop(instance_id=None):
-    return(jsonify({"result":"success"}))
+    Instance.Instance(instance_id).turn_off()
+    return jsonify({"result": "success"})
+
+
 @app.route("/setReboot/<instance_id>", methods=['POST'])
 def setReboot(instance_id=None):
-    return(jsonify({"result":"success"}))
+    Instance.Instance(instance_id).reboot()
+    return jsonify({"result": "success"})
+
+
 @app.route("/setKill/<instance_id>", methods=['POST'])
 def setKill(instance_id=None):
-    return(jsonify({"result":"success"}))
+    Instance.Instance(instance_id).terminate()
+    return jsonify({"result": "success"})
+
+
 @app.route("/setDownCreateImage/<instance_id>", methods=['POST'])
 def setDownCreateImage(instance_id=None):
-    return(jsonify({"result":"success"}))
+    return jsonify({"result": "success"})
+
+
 @app.route("/setDownBundleInstance/<instance_id>", methods=['POST'])
 def setDownBundleInstance(instance_id=None):
-    return(jsonify({"result":"success"}))
-@app.route("/setT2/<instance_id>",methods=["POST"])
+    return jsonify({"result": "success"})
+
+
+@app.route("/setT2/<instance_id>", methods=["POST"])
 def setT2(instance_id=None):
-    return(jsonify({"result":"success"}))
+    return jsonify({"result": "success"})
+
 
 @app.route("/", methods=["GET"])
 def home():
